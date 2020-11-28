@@ -16,7 +16,7 @@ const Lang = Language.getString('system_stats');
 
 Asena.addCommand({pattern: 'alive', fromMe: true, desc: Lang.ALIVE_DESC}, (async (message, match) => {
     await message.sendMessage(
-        '```⚡ l AM FAST AS FUCK BOI ⚡```\n\n*🤴 Owner:*\nhttp://bit.ly/AmineSoukaraWhtsp\n\n*🤖 Version:* ```'+Config.VERSION+'```\n*👥 Telegram Group:*\nhttps://t.me/DamienHelp\n*💬 Telegram Channel:*\nhttps://t.me/DamienSoukara' , MessageType.text
+        '```⚡ l AM FAST AS FUCK BOI ⚡```\n\n*🤴 Owner:*\nhttp://bit.ly/AmineSoukaraWhtsp\n\n*🤖 Version:*\n```'+Config.VERSION+'```\n*👥 Telegram Group:*\nhttps://t.me/DamienHelp\n*💬 Telegram Channel:*\nhttps://t.me/DamienSoukara' , MessageType.text
     );
 }));
 
