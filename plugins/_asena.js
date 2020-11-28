@@ -13,7 +13,7 @@ const Language = require('../language');
 
 const Lang = Language.getString('_asena');
 
-Asena.addCommand({pattern: 'Damien', fromMe: true}, (async (message, match) => {
+Asena.addCommand({pattern: 'damien', fromMe: true}, (async (message, match) => {
     var CMD_HELP = '';
 
     Asena.commands.map(
