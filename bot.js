@@ -15,6 +15,7 @@ const {WAConnection, MessageType, Mimetype, Presence} = require('@adiwajshing/ba
 const {Message, StringSession, Image, Video} = require('./whatsasena/');
 const { DataTypes } = require('sequelize');
 const { GreetingsDB, getMessage } = require("./plugins/sql/greetings");
+const got = require('got');
 
 // Sql
 const WhatsAsenaDB = config.DATABASE.define('WhatsAsena', {
@@ -34,12 +35,29 @@ fs.readdirSync('./plugins/sql/').forEach(plugin => {
     }
 });
 
+const plugindb = require('./plugins/sql/plugin');
+
 // Yalnızca bir kolaylık. https://stackoverflow.com/questions/4974238/javascript-equivalent-of-pythons-format-function //
 String.prototype.format = function () {
     var i = 0, args = arguments;
     return this.replace(/{}/g, function () {
       return typeof args[i] != 'undefined' ? args[i++] : '';
     });
+};
+
+if (!Date.now) {
+    Date.now = function() { return new Date().getTime(); }
+}
+
+Array.prototype.remove = function() {
+    var what, a = arguments, L = a.length, ax;
+    while (L && this.length) {
+        what = a[--L];
+        while ((ax = this.indexOf(what)) !== -1) {
+            this.splice(ax, 1);
+        }
+    }
+    return this;
 };
 
 async function whatsAsena () {
@@ -53,7 +71,7 @@ async function whatsAsena () {
     const conn = new WAConnection();
     const Session = new StringSession();
 
-    conn.logger.level = 'warn';
+    conn.logger.level = config.DEBUG ? 'debug' : 'warn';
     var nodb;
 
     if (StrSes_Db.length < 1) {
@@ -80,27 +98,43 @@ async function whatsAsena () {
         console.log(`${chalk.green.bold('Whats')}${chalk.blue.bold('Asena')}
 ${chalk.white.bold('Version:')} ${chalk.red.bold(config.VERSION)}
 
-${chalk.blue.italic('ℹ️ Connecting to WhatsApp ... Please wait.')}`);
+${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please wait.')}`);
     });
     
 
-    conn.on('open', () => {
+    conn.on('open', async () => {
         console.log(
             chalk.green.bold('✅ Login successful!')
         );
-    
+
         console.log(
-            chalk.blueBright.italic('⬇️ Installing plugins ...')
+            chalk.blueBright.italic('⬇️ Installing external plugins...')
         );
-    
+
+        var plugins = await plugindb.PluginDB.findAll();
+        plugins.map(async (plugin) => {
+            if (!fs.existsSync('./plugins/' + plugin.dataValues.name + '.js')) {
+                console.log(plugin.dataValues.name);
+                var response = await got(plugin.dataValues.url);
+                if (response.statusCode == 200) {
+                    fs.writeFileSync('./plugins/' + plugin.dataValues.name + '.js', response.body);
+                    require('./plugins/' + plugin.dataValues.name + '.js');
+                }     
+            }
+        });
+
+        console.log(
+            chalk.blueBright.italic('⬇️  Installing plugins...')
+        );
+
         fs.readdirSync('./plugins').forEach(plugin => {
             if(path.extname(plugin).toLowerCase() == '.js') {
                 require('./plugins/' + plugin);
             }
         });
-    
+
         console.log(
-            chalk.blueBright.italic('✅ Plugins Installed!')
+            chalk.green.bold('✅ Plugins installed!')
         );
     });
     
@@ -153,9 +187,9 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp ... Please wait.')}`);
 
                     let sendMsg = false;
                     var chat = conn.chats.get(msg.key.remoteJid)
-                    
+                        
                     if ((config.SUDO !== false && msg.key.fromMe === false && command.fromMe === true &&
-                        (msg.participant && msg.participant.split('@')[0] == config.SUDO || msg.key.remoteJid.split('@')[0] == config.SUDO)
+                        (msg.participant && config.SUDO.includes(',') ? config.SUDO.split(',').includes(msg.participant.split('@')[0]) : msg.participant.split('@')[0] == config.SUDO || config.SUDO.includes(',') ? config.SUDO.split(',').includes(msg.key.remoteJid.split('@')[0]) : msg.key.remoteJid.split('@')[0] == config.SUDO)
                     ) || command.fromMe === msg.key.fromMe || (command.fromMe === false && !msg.key.fromMe)) {
                         if (command.onlyPinned && chat.pin === undefined) return;
                         if (!command.onlyPm === chat.jid.includes('-')) sendMsg = true;
@@ -214,7 +248,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp ... Please wait.')}`);
         await conn.connect();
     } catch {
         if (!nodb) {
-            console.log(chalk.red.bold('Your old version string is being renewed ...'))
+            console.log(chalk.red.bold('Eski sürüm stringiniz yenileniyor...'))
             conn.loadAuthInfo(Session.deCrypt(config.SESSION)); 
             try {
                 await conn.connect();
