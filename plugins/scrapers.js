@@ -76,7 +76,7 @@ Asena.addCommand({pattern: 'currency(?: ([0-9.]+) ([a-zA-Z]+) ([a-zA-Z]+)|$|(.*)
     }
 }));
 
-Asena.addCommand({pattern: 'tts (.*)', fromMe: true, desc: Lang.TTS_DESC}, (async (message, match) => {
+Asena.addCommand({pattern: 'gol (.*)', fromMe: true, desc: Lang.TTS_DESC}, (async (message, match) => {
     if(match[1] === undefined || match[1] == "")
         return;
     
@@ -85,7 +85,7 @@ Asena.addCommand({pattern: 'tts (.*)', fromMe: true, desc: Lang.TTS_DESC}, (asyn
         ttsMessage = match[1],
         SPEED = 1.0
 
-    if(langMatch = match[1].match("\\{([a-z]{2})\\}")) {
+    if(langMatch = match[1].match("\\{([أ-ي]{2})\\}")) {
         LANG = langMatch[1]
         ttsMessage = ttsMessage.replace(langMatch[0], "")
     } 
