@@ -11,7 +11,7 @@
             "NOT_FOUND": "*I Couldn't Find A Command Like This*"
         },
         "_plugin": {
-            "INSTALL_DESC": "Plugin installs.",
+            "INSTALL_DESC": "Install external plugins.",
             "NEED_URL": "Please enter a URL! Example:",
             "INVALID_URL": "```Please enter a valid url!```",
             "INVALID_PLUGIN": "*❌ Your plugin is invalid!*\n*Error:*",
@@ -45,7 +45,7 @@
             "INVITE": "💬 ```Invitation link: ```"
         },
         "afk": {
-            "AFK_DESC": "It Makes You AFK.",
+            "AFK_DESC": "It Makes You AFK - Away From Keyboard.",
             "IM_AFK": "*I'm AFK Now!*",
             "IM_AFK_NOMD": "I'm AFK Now!",
             "REASON": "Reason",
@@ -92,7 +92,7 @@
             "GOODBYE_SETTED": "*✅ Goodbye Message Has been Setted Successfully!*"
         },
         "lydia": {
-            "ADDLYDIA_DESC": "Activates Lydia for the user.",
+            "ADDLYDIA_DESC": "Activates Lydia (AI) for the user.",
             "NEED_REPLY": "```Please respond to a user's message!```",
             "COFFEEHOUSE": "```You haven't defined the Coffehouse API Key! ```",
             "ENABLED_LYDIA": "```Lydia has been activated for this user!```",
@@ -102,7 +102,7 @@
             "DISABLED": "```Lydia has been disabled for this user!```"
         },
         "profile": {
-            "KICKME_DESC": "It Kicks You.",
+            "KICKME_DESC": "It Kicks You, from the group you are using it in.",
             "KICKME": "```Bye Bye! I Am Going 🤠```",
             "PP_DESC": "Makes The Profile Photo What Photo You Reply.",
             "NEED_PHOTO": "*Give Me A Photo!*",
@@ -121,7 +121,7 @@
             "LANG": "Language",
             "FROM": "Translated Language",
             "RESULT": "Translate",
-            "TRANSLATE_ERROR": "\"❌ An Error Occurs In Translation!*",
+            "TRANSLATE_ERROR": "\"❌ An Error Occured while translating!*",
             "CURRENCY_ERROR": "```Syntax Error! Example: .currency 1 TRY USD```",
             "INVALID_CURRENCY": "```Foreign Currency Transaction Failed. You Wrote Wrong Currency!```",
             "UNKNOWN_ERROR": "```An Error Occurred. Foreign Currency Transaction Gailed!```",
@@ -141,8 +141,8 @@
             "GETTING_VIDEOS": "```I'm Bringing Videos...```",
             "NOT_FOUND": "*I Couldn't Find Anything :(*",
             "SEARCHING": "* 🔎 Searching...*",
-            "WIKI_DESC": "Searches on Wikipedia.",
-            "IMG_DESC": "Takes Google pics.",
+            "WIKI_DESC": "Searches query on Wikipedia.",
+            "IMG_DESC": "Searches for related pics on Google.",
             "IMG": "Uploading photo ```{}``` number ```{} `..."
         },
         "sticker": {
@@ -164,8 +164,8 @@
             "UPDATE_NOW_DESC": "It mMkes Updates.",
             "UPDATING": "_Updating..._",
             "INVALID_HEROKU": "*❌ Your Heroku Information Is Wrong!*",
-            "UPDATED": "✅ Update Was Successful!*",
-            "UPDATED_LOCAL": "*✅ Update Was Successful! *\n_You Must Restart For Changes._"
+            "UPDATED": "✅ *Successfully Updated!*",
+            "UPDATED_LOCAL": "*✅ Successfully Updated! *\n_Please restart your bot for the changes._"
         },
         "weather": {
             "WEATHER_DESC": "Shows The Weather.",
