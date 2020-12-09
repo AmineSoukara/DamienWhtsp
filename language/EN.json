@@ -53,7 +53,7 @@
             "IM_NOT_AFK": "```I Am Not AFK Anymore!```",
             "AFK_TEXT": "```Bip Bop! This Is A Bot. My Owner Is Not Here At The Moment.```",
             "AFK_TEXT_NOMD": "Bip Bop! This Is A Bot. My Owner Is Not Here At The Moment.",
-            "HOUR": "Time",
+            "HOUR": "hour",
             "MINUTE": "Minute",
             "SECOND": "Second"
         },
