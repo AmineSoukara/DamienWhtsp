@@ -126,7 +126,7 @@ Asena.addCommand({pattern: '24Hmute', fromMe: true, onlyGroup: true}, (async (me
 
 }));
 
-Asena.addCommand({pattern: 'infomute', fromMe: true,}, (async (message, match) => {
+Asena.addCommand({pattern: 'xmute', fromMe: true,}, (async (message, match) => {
 
     await message.sendMessage('*Codded By : @DamienSoukara \n🇬🇧 Closes The Chat.\n\n💻Usage: *.1mute*\n💻Usage: *.2mute*\n💻Usage: *.5mute*\n💻Usage: *.10mute*\n💻Usage: *.20mute*\n💻Usage: *.30mute*\n💻Usage: *.60mute*\n💻Usage: *.24Hmute*');                
 
