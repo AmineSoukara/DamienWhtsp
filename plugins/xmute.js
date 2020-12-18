@@ -1,6 +1,6 @@
-/*Codded by @
-Telegram: t.me/
-Instagram: www.instagram.com/
+/*Edited By @AmineSoukara
+Telegram: t.me/AmineSoukara 
+Instagram: www.instagram.com/AmineSoukara 
 */
 
 const Asena = require('../events');
