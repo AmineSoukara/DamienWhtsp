@@ -14,7 +14,7 @@ async function checkImAdmin(message, user = message.client.user.jid) {
     return sonuc.includes(true);
 }
 
-Asena.addCommand({pattern: '1mute', fromMe: true, onlyGroup: true}, (async (message, match) => {
+Asena.addCommand({pattern: 'mute1M', fromMe: true, onlyGroup: true}, (async (message, match) => {
     
     var im = await checkImAdmin(message);
     if (!im) return await message.sendMessage('*I am not admin this group.*');
