@@ -103,7 +103,7 @@ Asena.addCommand({pattern: '60mute', fromMe: true, onlyGroup: true}, (async (mes
     var im = await checkImAdmin(message);
     if (!im) return await message.sendMessage('*I am not admin this group.*');
     await message.client.groupSettingChange(message.jid, GroupSettingChange.messageSend, true);
-    await message.sendMessage('*Group chat shut down for one hours!*');
+    await message.sendMessage('*Group chat shut down for one hour!*');
 
     await new Promise(r => setTimeout(r, 3600000));
     
@@ -128,7 +128,7 @@ Asena.addCommand({pattern: '24Hmute', fromMe: true, onlyGroup: true}, (async (me
 
 Asena.addCommand({pattern: 'xmute', fromMe: true,}, (async (message, match) => {
 
-    await message.sendMessage('*Codded By : @DamienSoukara \n🇬🇧 Closes The Chat.\n\n💻Usage: *.1mute*\n💻Usage: *.2mute*\n💻Usage: *.5mute*\n💻Usage: *.10mute*\n💻Usage: *.20mute*\n💻Usage: *.30mute*\n💻Usage: *.60mute*\n💻Usage: *.24Hmute*');                
+    await message.sendMessage('*Codded By : @DamienSoukara* \n🇬🇧 Closes The Chat.\n\n💻Usage: *.1mute*\n💻Usage: *.2mute*\n💻Usage: *.5mute*\n💻Usage: *.10mute*\n💻Usage: *.20mute*\n💻Usage: *.30mute*\n💻Usage: *.60mute*\n💻Usage: *.24Hmute*');                
 
 }));
 
