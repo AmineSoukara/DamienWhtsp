@@ -12,7 +12,7 @@ const {spawnSync} = require('child_process');
 const Config = require('../config');
 
 const Language = require('../language');
-const Lang = Language.getString('system_stats');
+const Lang = Language.getString('damien');
 
 Asena.addCommand({pattern: 'rules', fromMe: true, desc: Lang.RULES_DESC}, (async (message, match) => {
     await message.sendMessage(
