@@ -211,6 +211,10 @@
             "UPLOAD": "Upload",
             "DOWNLOAD": "Download",
             "PING_DESC": "Measures Your Ping."
+        },
+        "damien": {
+            "RULES": "Rules D Groups.",
+            "DAMIEN": "Damien Soukara."
         }
     }
 }
