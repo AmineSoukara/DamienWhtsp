@@ -23,18 +23,20 @@ Asena.addCommand({pattern: 'update$', fromMe: true, desc: Lang.UPDATER_DESC}, (a
     await git.fetch();
     var commits = await git.log([Config.BRANCH + '..origin/' + Config.BRANCH]);
     if (commits.total === 0) {
-        await message.sendMessage(
+        await message.client.sendMessage(
+            message.jid,
             Lang.UPDATE, MessageType.text
         );    
     } else {
         var degisiklikler = Lang.NEW_UPDATE;
         commits['all'].map(
             (commit) => {
-                degisiklikler += '👾 [' + commit.date.substring(0, 10) + ']: ' + commit.message + '\n🤴 @' + commit.author_name + '.\n\n';
+                degisiklikler += '👾 [' + commit.date.substring(0, 10) + ']: ' + commit.message + '\n🤴 @' + commit.author_name + '\n\n';
             }
         );
         
-        await message.sendMessage(
+        await message.client.sendMessage(
+            message.jid,
             degisiklikler + '```', MessageType.text
         ); 
     }
@@ -44,7 +46,8 @@ Asena.addCommand({pattern: 'update now$', fromMe: true, desc: Lang.UPDATE_NOW_DE
     await git.fetch();
     var commits = await git.log([Config.BRANCH + '..origin/' + Config.BRANCH]);
     if (commits.total === 0) {
-        return await message.sendMessage(
+        return await message.client.sendMessage(
+            message.jid,
             Lang.UPDATE, MessageType.text
         );    
     } else {
@@ -53,7 +56,8 @@ Asena.addCommand({pattern: 'update now$', fromMe: true, desc: Lang.UPDATE_NOW_DE
             try {
                 var app = await heroku.get('/apps/' + Config.HEROKU.APP_NAME)
             } catch {
-                return await message.sendMessage(Lang.INVALID_HEROKU, MessageType.text);
+                return await message.client.sendMessage(
+                    message.jid,Lang.INVALID_HEROKU, MessageType.text);
             }
 
             git.fetch('upstream', Config.BRANCH);
@@ -68,14 +72,17 @@ Asena.addCommand({pattern: 'update now$', fromMe: true, desc: Lang.UPDATE_NOW_DE
             } catch { console.log('heroku remote ekli'); }
             await git.push('heroku', Config.BRANCH);
             
-            await message.sendMessage(Lang.UPDATED, MessageType.text);
+            await message.client.sendMessage(
+                message.jid,Lang.UPDATED, MessageType.text);
         } else {
             git.pull((async (err, update) => {
                 if(update && update.summary.changes) {
-                    await message.sendMessage(Lang.UPDATED_LOCAL, MessageType.text);
+                    await message.client.sendMessage(
+                        message.jid,Lang.UPDATED_LOCAL, MessageType.text);
                     exec('npm install').stderr.pipe(process.stderr);
                 } else if (err) {
-                    await message.sendMessage('*❌ Güncelleme başarısız oldu!*\n*Hata:* ```' + err + '```', MessageType.text);
+                    await message.client.sendMessage(
+                        message.jid,'*❌ Update Failed!*\n*Error:* ```' + err + '```', MessageType.text);
                 }
             }));
             await guncelleme.delete();
