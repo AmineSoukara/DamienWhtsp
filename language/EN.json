@@ -121,11 +121,18 @@
             "DISABLED": "```Lydia has been disabled for this user!```"
         },
         "profile": {
-            "KICKME_DESC": "It Kicks You, from the group you are using it in.",
-            "KICKME": "```Bye Bye! I Am Going 🤠```",
-            "PP_DESC": "Makes The Profile Photo What Photo You Reply.",
-            "NEED_PHOTO": "*Give Me A Photo!*",
-            "PPING": "```Setting Profile Photo...```"
+            "KICKME_DESC": "It kicks you from the group you are using it in.",
+            "KICKME": "```Bye bye! I am going 🤠```",
+            "PP_DESC": "Makes the profile photo what photo you reply.",
+            "NEED_PHOTO": "*Give me a photo!*",
+            "PPING": "```Setting profile photo...```",
+            "BLOCK_DESC": "Block user.",
+            "UNBLOCK_DESC": "Unblock user.",
+            "BLOCKED": "blocked",
+            "UNBLOCKED": "unblocked",
+            "BLOCKED_UPPER": "Blocked!",
+            "UNBLOCKED_UPPER": "Unblocked.",
+            "NEED_USER": "Give me a user!"
         },
         "removebg": {
             "REMOVEBG_DESC": "Removes The Background Of The Photos.",
