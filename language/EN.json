@@ -119,7 +119,19 @@
             "RMLYDIA_DESC": "Makes Lydia disabled for the user.",
             "ALREADY_EMPTY": "```Your user list is already empty!```",
             "NOT_ADDED": "```You haven't added this user already!```",
-            "DISABLED": "```Lydia has been disabled for this user!```"
+            "DISABLED": "```Lydia Has Been Disabled For This User!```"
+        },
+        "memes": {
+            "MEMES_DESC": "Photo Memes You Replied To.",
+            "NEED_REPLY": "*Reply To A Photo!*",
+            "DOWNLOADING": "```Downloading Media & Making Meme...```"
+        },
+        "ocr": {
+            "OCR_DESC": "Reads The Text On The Photo You Have Replied.",
+            "NEED_REPLY": "*Reply To A Photo!*",
+            "DOWNLOADING": "```Media Is Downloading & Reading...```",
+            "ERROR": "```I Couldn't Read This :/```\n*Error:*```{}```",
+            "RESULT": "*Language:* ```{}```\n*Here Is What I Read:* ```{}```"
         },
         "profile": {
             "KICKME_DESC": "It kicks you from the group you are using it in.",
@@ -133,7 +145,10 @@
             "UNBLOCKED": "unblocked",
             "BLOCKED_UPPER": "Blocked!",
             "UNBLOCKED_UPPER": "Unblocked.",
-            "NEED_USER": "Give me a user!"
+            "NEED_USER": "Give Me A User!",
+            "JID_DESC": "Giving User's JID.",
+            "JID": "```JID Address Of``` @{} ```: {}```",
+            "JID_CHAT": "```Chat's JID Address: {}```"
         },
         "removebg": {
             "REMOVEBG_DESC": "Removes The Background Of The Photos.",
