@@ -1,4 +1,4 @@
-FROM fusuf/whatsasena:latest
+FROM aminesoukara/damienwhtsp:latest
 
 RUN git clone https://github.com/AmineSoukara/DamienWhtsp /root/WhatsAsena
 WORKDIR /root/WhatsAsena/
