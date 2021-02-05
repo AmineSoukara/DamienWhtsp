@@ -7,6 +7,7 @@ WhatsAsena - Yusuf Usta
 */
 
 const Asena = require('../events');
+const Heroku = require('heroku-client');
 const Config = require('../config');
 const {MessageType} = require('@adiwajshing/baileys');
 const got = require('got');
@@ -16,8 +17,16 @@ const Db = require('./sql/plugin');
 const Language = require('../language');
 const Lang = Language.getString('_plugin');
 
-Asena.addCommand({pattern: 'install ?(.*)', fromMe: true, desc: Lang.INSTALL_DESC, usage: '.install https://gist.github.com/AmineSoukara/4f857740d02f1853accb910a2eaaf35d'}, (async (message, match) => {
-    if (match[1] === '') return await message.sendMessage('```' + Lang.NEED_URL + '.install https://gist.github.com/AmineSoukara/4f857740d02f1853accb910a2eaaf35d```')
+
+const heroku = new Heroku({
+    token: Config.HEROKU.API_KEY
+});
+
+
+let baseURI = '/apps/' + Config.HEROKU.APP_NAME;
+
+Asena.addCommand({pattern: 'install ?(.*)', fromMe: true, desc: Lang.INSTALL_DESC}, (async (message, match) => {
+    if (match[1] === '') return await message.sendMessage(Lang.NEED_URL + '.install https://gist.github.com/phaticusthiccy/4232b1c8c4734e1f06c3d991149c6fbd')
     try {
         var url = new URL(match[1]);
     } catch {
@@ -79,6 +88,17 @@ Asena.addCommand({pattern: 'remove(?: |$)(.*)', fromMe: true, desc: Lang.REMOVE_
         await plugin[0].destroy();
         delete require.cache[require.resolve('./' + match[1] + '.js')]
         fs.unlinkSync('./plugins/' + match[1] + '.js');
-        return await message.client.sendMessage(message.jid, Lang.DELETED, MessageType.text);
+        await message.client.sendMessage(message.jid, Lang.DELETED, MessageType.text);
+        
+        await new Promise(r => setTimeout(r, 2000));
+    
+        await message.sendMessage('💬 *DamienWhtsp Restarting Automatically!*');
+
+        console.log(baseURI);
+        await heroku.delete(baseURI + '/dynos').catch(async (error) => {
+            await message.sendMessage(error.message);
+
+        });
     }
+
 }));
