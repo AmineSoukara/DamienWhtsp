@@ -19,6 +19,7 @@ const heroku = new Heroku({ token: Config.HEROKU.API_KEY })
 const Language = require('../language');
 const Lang = Language.getString('updater');
 
+
 Asena.addCommand({pattern: 'update$', fromMe: true, desc: Lang.UPDATER_DESC}, (async (message, match) => {
     await git.fetch();
     var commits = await git.log([Config.BRANCH + '..origin/' + Config.BRANCH]);
@@ -31,7 +32,7 @@ Asena.addCommand({pattern: 'update$', fromMe: true, desc: Lang.UPDATER_DESC}, (a
         var degisiklikler = Lang.NEW_UPDATE;
         commits['all'].map(
             (commit) => {
-                degisiklikler += '👾 [' + commit.date.substring(0, 10) + ']: ' + commit.message + '\n🤴 @' + commit.author_name + '\n\n';
+                degisiklikler += '👾 [' + commit.date.substring(0, 10) + ']: ' + commit.message + '\n🤴 @' + commit.author_name + '\n';
             }
         );
         
@@ -71,9 +72,12 @@ Asena.addCommand({pattern: 'update now$', fromMe: true, desc: Lang.UPDATE_NOW_DE
                 await git.addRemote('heroku', git_url);
             } catch { console.log('heroku remote ekli'); }
             await git.push('heroku', Config.BRANCH);
-            
+
             await message.client.sendMessage(
                 message.jid,Lang.UPDATED, MessageType.text);
+
+            await message.sendMessage('💬 *DamienWhtsp Restarting Automatically!* ');
+            
         } else {
             git.pull((async (err, update) => {
                 if(update && update.summary.changes) {
