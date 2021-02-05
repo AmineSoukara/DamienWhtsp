@@ -54,6 +54,20 @@ Asena.addCommand({pattern: 'add(?: |$)(.*)', fromMe: true, onlyGroup: true, desc
     }
 }));
 
+Asena.addCommand({pattern: '+(?: |$)(.*)', fromMe: true, onlyGroup: true, desc: Lang.ADD_DESC, usage: '.add 905xxxxxxxxx'}, (async (message, match) => {  
+    var im = await checkImAdmin(message);
+    if (!im) return await message.sendMessage(Lang.IM_NOT_ADMIN);
+    
+    if (match[1] !== '') {
+        match[1].split(' ').map(async (user) => {
+            await message.client.groupAdd(message.jid, [user + "@s.whatsapp.net"]);
+            await message.sendMessage('```'+ Lang.AD +' ' + user + ' ' + Lang.ADDED +'```');
+        });
+    } else {
+        return await message.sendMessage(Lang.GIVE_ME_USER);
+    }
+}));
+
 Asena.addCommand({pattern: 'promote ?(.*)', fromMe: true, onlyGroup: true, desc: Lang.PROMOTE_DESC}, (async (message, match) => {    
     var im = await checkImAdmin(message);
     if (!im) return await message.client.sendMessage(message.jid,Lang.IM_NOT_ADMIN,MessageType.text);
