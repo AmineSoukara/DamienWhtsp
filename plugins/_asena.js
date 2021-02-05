@@ -20,7 +20,7 @@ Asena.addCommand({pattern: 'damien ?(.*)', fromMe: true, dontAddCommandList: tru
             async (command) =>  {
                 if (command.dontAddCommandList || command.pattern === undefined) return;
                 try {
-                    var match = command.pattern.toString().match(/(\W*)([A-Za-zğüşiöç]*)/);
+                    var match = command.pattern.toString().match(/(\W*)([A-Za-zğüşiöç1234567890]*)/);
                 } catch {
                     var match = [command.pattern];
                 }
@@ -33,8 +33,10 @@ Asena.addCommand({pattern: 'damien ?(.*)', fromMe: true, dontAddCommandList: tru
                     HANDLER = '.';
                 }
                 CMD_HELP += '*🛠 ' + Lang.COMMAND + ':* ```' + (match.length >= 3 ? (HANDLER + match[2]) : command.pattern) + (command.desc === '' ? '```\n\n' : '```\n');
-                if (command.desc !== '') CMD_HELP += '*💬 ' + Lang.DESC + ':* ```' + command.desc + (command.usage === '' ? '```\n\n' : '```\n');
+                if (command.desc !== '') CMD_HELP += '*💬 ' + Lang.DESC + ':* ```' + command.desc + (command.warn === '' ? '```\n\n' : '```\n');
                 if (command.usage !== '') CMD_HELP += '*⌨️ ' + Lang.EXAMPLE + ':* ```' + command.usage + '```\n\n';
+                if (command.warn !== '') CMD_HELP += '*⚠️ ' + Lang.WARN + ':* ```' + command.warn + '```\n\n';
+
             }
         );
         
@@ -47,7 +49,7 @@ Asena.addCommand({pattern: 'damien ?(.*)', fromMe: true, dontAddCommandList: tru
             async (command) =>  {
                 if (command.dontAddCommandList || command.pattern === undefined) return;
                 try {
-                    var cmatch = command.pattern.toString().match(/(\W*)([A-Za-zğüşiöç]*)/);
+                    var cmatch = command.pattern.toString().match(/(\W*)([A-Za-zğüşiöç1234567890]*)/);
                 } catch {
                     var cmatch = [command.pattern];
                 }
@@ -61,8 +63,10 @@ Asena.addCommand({pattern: 'damien ?(.*)', fromMe: true, dontAddCommandList: tru
                         HANDLER = '.';
                     }
                     CMD_HELP += '*🛠 ' + Lang.COMMAND + ':* ```' + (cmatch.length >= 3 ? (HANDLER + cmatch[2]) : command.pattern) + (command.desc === '' ? '```\n\n' : '```\n');
-                    if (command.desc !== '') CMD_HELP += '*💬 ' + Lang.DESC + ':* ```' + command.desc + (command.usage === '' ? '```\n\n' : '```\n');
-                    if (command.usage !== '') CMD_HELP += '*⌨️ ' + Lang.EXAMPLE + ':* ```' + command.usage + '```\n\n';    
+                    if (command.desc !== '') CMD_HELP += '*💬 ' + Lang.DESC + ':* ```' + command.desc + (command.warn === '' ? '```\n\n' : '```\n');
+                    if (command.usage !== '') CMD_HELP += '*⌨️ ' + Lang.EXAMPLE + ':* ```' + command.usage + '```\n\n';
+                    if (command.warn !== '') CMD_HELP += '*⚠️ ' + Lang.WARN + ':* ```' + command.warn + '```\n\n';
+
                 }
             }
         );

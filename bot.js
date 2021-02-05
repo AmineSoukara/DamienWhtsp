@@ -18,7 +18,7 @@ const { GreetingsDB, getMessage } = require("./plugins/sql/greetings");
 const got = require('got');
 
 // Sql
-const WhatsAsenaDB = config.DATABASE.define('WhatsAsena', {
+const WhatsAsenaDB = config.DATABASE.define('DamienWhtsp', {
     info: {
       type: DataTypes.STRING,
       allowNull: false
@@ -221,7 +221,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please wait.')}`);
                             await command.function(whats, match);
                         } catch (error) {
                             if (config.LANG == 'TR' || config.LANG == 'AZ') {
-                                await conn.sendMessage(conn.user.jid, '*-- HATA RAPORU [WHATSASENA] --*' + 
+                                await conn.sendMessage(conn.user.jid, '*-- HATA RAPORU [DAMIEN-WHTSP] --*' + 
                                     '\n*WhatsAsena bir hata gerçekleşti!*'+
                                     '\n_Bu hata logunda numaranız veya karşı bir tarafın numarası olabilir. Lütfen buna dikkat edin!_' +
                                     '\n_Yardım için Telegram grubumuza yazabilirsiniz._' +
@@ -229,8 +229,8 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please wait.')}`);
                                     '*Gerçekleşen Hata:* ```' + error + '```\n\n'
                                     , MessageType.text);
                             } else {
-                                await conn.sendMessage(conn.user.jid, '*-- ERROR REPORT ⛔ [DAMIEN-WHTSP] --*' + 
-                                    '\n*WhatsDamien an error has occurred!*'+
+                                await conn.sendMessage(conn.user.jid, '*-- ⛔ ERROR REPORT [DAMIEN-WHTSP] ⛔ --*' + 
+                                    '\n*DAMIEN : an error has occurred!*'+
                                     '\n_This error log may include your number or the number of an opponent. Please be careful with it!_' +
                                     '\n_You can write to our Telegram group for help._' +
                                     '\n_This message should have gone to your number (saved messages)._\n\n' +
