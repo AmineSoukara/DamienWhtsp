@@ -44,6 +44,7 @@
             "UNMUTED": "```The group chat has unmuted!```",
             "INVITE_DESC": "Provides the group's invitation link.",
             "INVITE": "```Invitation link: ```"
+            "RULES": "Rules D Groups"
         },
         "locate": {
             "L_DESC": "It send your location.",
@@ -362,11 +363,7 @@
             "NEED_WORD": "*You must enter words!*"
         },
         "wallpaper": {
-            "WP": "It sends high resolution wallpapers.",
-        },
-        "damien": {
-            "RULES": "Rules D Groups.",
-            "DAMIEN": "Damien Soukara."
+            "WP": "It sends high resolution wallpapers."
         }
     }
 }
