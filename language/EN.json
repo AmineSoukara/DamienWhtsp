@@ -362,7 +362,11 @@
             "NEED_WORD": "*You must enter words!*"
         },
         "wallpaper": {
-            "WP": "It sends high resolution wallpapers."
+            "WP": "It sends high resolution wallpapers.",
+        },
+        "damien": {
+            "RULES": "Rules D Groups.",
+            "DAMIEN": "Damien Soukara."
         }
     }
 }
