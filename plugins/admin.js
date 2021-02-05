@@ -20,13 +20,6 @@ async function checkImAdmin(message, user = message.client.user.jid) {
     return sonuc.includes(true);
 }
 
-Asena.addCommand({pattern: 'rules', fromMe: true, desc: Lang.RULES}, (async (message, match) => {
-    await message.sendMessage(
-        '*OUR WHATSAPP  GROUP  RULES & GUIDELINES*\n\n\n✅ *Do’s – Practices which are appreciated*\n\n● Every member of this group are requested to maintain the decorum of this group so that this group can fulfill the purpose\n● Do regular study and jot-down important facts and post on group whenever you get free time , Everyone must write posts only those are relevant to the group subject.\nPlease also understand and value each others time. If any one feels this group is not suitable for them, they are free to leave the group. Helps admins accommodate better focused people.\n\n\n⛔ *Don’ts – Practices which are banned by Admins:*\n\n● No jokes/quotes/ Emojis/Gif/ Stickers.... or any other irrelevant things are not  allowed to post in this group\n● Do not post anything outside the topic,Do not spam or post any irrelevant messages in the group.\n● No group invite links, Members are prohibited from sharing external group invite links in the group. Only admins will do it as and when necessary.\n● Don’t initiate any direct conversation outside the group if you don’t know him/her personally. But if you need any help from other members, you can ask from admin.\n● No post/discussion in between 11PM to 6AM\nIn larger interest, members are expected to refrain from sending messages without any defined intent of conversation – For example: ‘Good Morning’, ‘Good Night’. We need to focus on quality of discussion and not quantity.\n\n😆 Wa Akhiran Gad Group For Fun bach Nghyroha Chwiya : https://chat.whatsapp.com/CAKRgjjyPU2CTYBkOtfl3h' , MessageType.text
-    );
-}));
-
-
 Asena.addCommand({pattern: 'ban ?(.*)', fromMe: true, onlyGroup: true, desc: Lang.BAN_DESC}, (async (message, match) => {  
     var im = await checkImAdmin(message);
     if (!im) return await message.client.sendMessage(message.jid,Lang.IM_NOT_ADMIN,MessageType.text);
@@ -47,27 +40,7 @@ Asena.addCommand({pattern: 'ban ?(.*)', fromMe: true, onlyGroup: true, desc: Lan
     }
 }));
 
-Asena.addCommand({pattern: 'kick ?(.*)', fromMe: true, onlyGroup: true, desc: Lang.BAN_DESC}, (async (message, match) => {  
-    var im = await checkImAdmin(message);
-    if (!im) return await message.client.sendMessage(message.jid,Lang.IM_NOT_ADMIN,MessageType.text);
-
-    if (message.reply_message !== false) {
-        await message.client.sendMessage(message.jid,'@' + message.reply_message.data.participant.split('@')[0] + '```, ' + Lang.BANNED + '```', MessageType.text, {contextInfo: {mentionedJid: [message.reply_message.data.participant]}});
-        await message.client.groupRemove(message.jid, [message.reply_message.data.participant]);
-    } else if (message.reply_message === false && message.mention !== false) {
-        var etiketler = '';
-        message.mention.map(async (user) => {
-            etiketler += '@' + user.split('@')[0] + ',';
-        });
-
-        await message.client.sendMessage(message.jid,etiketler + '```, ' + Lang.BANNED + '```', MessageType.text, {contextInfo: {mentionedJid: message.mention}});
-        await message.client.groupRemove(message.jid, message.mention);
-    } else {
-        return await message.client.sendMessage(message.jid,Lang.GIVE_ME_USER,MessageType.text);
-    }
-}));
-
-/* Asena.addCommand({pattern: 'add(?: |$)(.*)', fromMe: true, onlyGroup: true, desc: Lang.ADD_DESC}, (async (message, match) => {  
+Asena.addCommand({pattern: 'add(?: |$)(.*)', fromMe: true, onlyGroup: true, desc: Lang.ADD_DESC}, (async (message, match) => {  
     var im = await checkImAdmin(message);
     if (!im) return await message.client.sendMessage(message.jid,Lang.IM_NOT_ADMIN,MessageType.text);
     
@@ -78,21 +51,6 @@ Asena.addCommand({pattern: 'kick ?(.*)', fromMe: true, onlyGroup: true, desc: La
         });
     } else {
         return await message.client.sendMessage(message.jid,Lang.GIVE_ME_USER,MessageType.text);
-    }
-}));
-*/
-
-Asena.addCommand({pattern: 'add(?: |$)(.*)', fromMe: true, onlyGroup: true, desc: Lang.ADD_DESC, usage: '.add 905xxxxxxxxx'}, (async (message, match) => {  
-    var im = await checkImAdmin(message);
-    if (!im) return await message.sendMessage(Lang.IM_NOT_ADMIN);
-    
-    if (match[1] !== '') {
-        match[1].split(' ').map(async (user) => {
-            await message.client.groupAdd(message.jid, [user + "@s.whatsapp.net"]);
-            await message.sendMessage('```'+ Lang.AD +' ' + user + ' ' + Lang.ADDED +'```');
-        });
-    } else {
-        return await message.sendMessage(Lang.GIVE_ME_USER);
     }
 }));
 
