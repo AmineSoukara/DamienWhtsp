@@ -40,7 +40,41 @@ Asena.addCommand({pattern: 'kick ?(.*)', fromMe: true, onlyGroup: true, desc: La
     }
 }));
 
-Asena.addCommand({pattern: 'add(?: |$)(.*)', fromMe: true, onlyGroup: true, desc: Lang.ADD_DESC}, (async (message, match) => {  
+Asena.addCommand({pattern: 'ban ?(.*)', fromMe: true, onlyGroup: true, desc: Lang.BAN_DESC}, (async (message, match) => {  
+    var im = await checkImAdmin(message);
+    if (!im) return await message.client.sendMessage(message.jid,Lang.IM_NOT_ADMIN,MessageType.text);
+
+    if (message.reply_message !== false) {
+        await message.client.sendMessage(message.jid,'@' + message.reply_message.data.participant.split('@')[0] + '```, ' + Lang.BANNED + '```', MessageType.text, {contextInfo: {mentionedJid: [message.reply_message.data.participant]}});
+        await message.client.groupRemove(message.jid, [message.reply_message.data.participant]);
+    } else if (message.reply_message === false && message.mention !== false) {
+        var etiketler = '';
+        message.mention.map(async (user) => {
+            etiketler += '@' + user.split('@')[0] + ',';
+        });
+
+        await message.client.sendMessage(message.jid,etiketler + '```, ' + Lang.BANNED + '```', MessageType.text, {contextInfo: {mentionedJid: message.mention}});
+        await message.client.groupRemove(message.jid, message.mention);
+    } else {
+        return await message.client.sendMessage(message.jid,Lang.GIVE_ME_USER,MessageType.text);
+    }
+}));
+
+Asena.addCommand({pattern: 'add(?: |$)(.*)', fromMe: true, onlyGroup: true, desc: Lang.ADD_DESC, usage: '.add 905xxxxxxxxx'}, (async (message, match) => {  
+    var im = await checkImAdmin(message);
+    if (!im) return await message.sendMessage(Lang.IM_NOT_ADMIN);
+    
+    if (match[1] !== '') {
+        match[1].split(' ').map(async (user) => {
+            await message.client.groupAdd(message.jid, [user + "@s.whatsapp.net"]);
+            await message.sendMessage('```'+ Lang.AD +' ' + user + ' ' + Lang.ADDED +'```');
+        });
+    } else {
+        return await message.sendMessage(Lang.GIVE_ME_USER);
+    }
+}));
+
+Asena.addCommand({pattern: 'inv(?: |$)(.*)', fromMe: true, onlyGroup: true, desc: Lang.ADD_DESC}, (async (message, match) => {  
     var im = await checkImAdmin(message);
     if (!im) return await message.client.sendMessage(message.jid,Lang.IM_NOT_ADMIN,MessageType.text);
     
