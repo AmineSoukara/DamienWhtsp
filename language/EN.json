@@ -2,7 +2,7 @@
     "__ASENAJSON__": true,
     "LANGUAGE": "English",
     "LANGCODE": "en",
-    "AUTHOR": "@Aminesoukara",
+    "AUTHOR": "Damien",
     "STRINGS": {
         "_asena": {
             "COMMAND": "Command",
@@ -363,6 +363,10 @@
         },
         "wallpaper": {
             "WP": "It sends high resolution wallpapers."
+        },
+        "webss": {
+            "SS_DESC": "Takes a screenshot from the page in the given link.",
+            "LİNK": "You must enter link!"
         }
     }
 }
