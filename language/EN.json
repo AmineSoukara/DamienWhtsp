@@ -198,6 +198,7 @@
         },
         "system_stats": {
             "ALIVE_DESC": "Does bot work?",
+            "RULES": "Rules D Groups",
             "SYSD_DESC": "Shows the system properties."
         },
         "tagall": {
