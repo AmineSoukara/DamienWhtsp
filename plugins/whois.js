@@ -16,9 +16,10 @@ var SRİ_USER = ''
 var RU_USER = ''
 var USA_USER = ''
 var FR_USER = ''
+var MA = ''
 var OTHER = ''
 if (CON.LANG == 'TR') ADMİN_USER = '*Admin Sayısı:*', USER_USER = '*Üye Sayısı:*', TR_USER = '*Türk Üye Sayısı:*', Hİ_USER = '*Hint Üye Sayısı:*', AZ_USER = '*Azeri Üye Sayısı:*', SRİ_USER = '*Sri Lanka Üye Sayısı:*', RU_USER = '*Rus Üye Sayısı:*', USA_USER = '*ABD Üye Sayısı:*', OTHER = '*Diğer Üye Sayısı:*', FR_USER = '*Fransız Üye Sayısı:*'
-if (CON.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Count:*', TR_USER = '*Turkish Member Count:*', Hİ_USER = '*Indian Member Count:*', AZ_USER = '*Azerbayjan Member Count:*', SRİ_USER = '*Sri Lanka Member Count:*', RU_USER = '*Russian Member Count:*', USA_USER = '*USA Member Count:*', OTHER = '*Other Member Count:*', FR_USER = '*French Member Count:*'
+if (CON.LANG == 'EN') ADMİN_USER = '*Admin Count:*', USER_USER = '*Member Count:*', TR_USER = '*Turkish Member Count:*', Hİ_USER = '*Indian Member Count:*', AZ_USER = '*Azerbayjan Member Count:*', SRİ_USER = '*Sri Lanka Member Count:*', RU_USER = '*Russian Member Count:*', USA_USER = '*USA Member Count:*', OTHER = '*Other Member Count:*', MA = '*Morocco Member Count:*',FR_USER = '*French Member Count:*'
 if (CON.LANG == 'AZ') ADMİN_USER = '*Admin sayı:*', USER_USER = '*Üzv sayı:*', TR_USER = '*Türk Üzv Sayısı:*', Hİ_USER = '*Hindistan üzv sayı:*', AZ_USER = '*Azərbaycan Üzv Sayısı:*', SRİ_USER = '*Şri Lanka üzv sayı:*', RU_USER = '*Rusiya Üzv Sayısı:*', USA_USER = '*ABD Üzv sayı:*', OTHER = '*Digər üzv sayı:*', FR_USER = '*Fransa Üzvləri Sayısı:*'
 if (CON.LANG == 'ES') ADMİN_USER = '*Recuento de administradores:*', USER_USER = '*Cuenta de miembro:*', TR_USER = '*Recuento de miembros turcos:*', Hİ_USER = '*Recuento de miembros indios:*', AZ_USER = '*Recuento de miembros de Azerbaiyán:*', SRİ_USER = '*Recuento de miembros de Sri Lanka:*', RU_USER = '*Recuento de miembros rusos:*', USA_USER = '*Recuento de miembros de USA:*', OTHER = '*Otro recuento de miembros:*', FR_USER = '*Recuento de miembros franceses:*'
 if (CON.LANG == 'PT') ADMİN_USER = '*Contagem de Admin:*', USER_USER = '*Contagem de membro:*', TR_USER = '*Contagem de membros turcos:*', Hİ_USER = '*Contagem de membros indianos:*', AZ_USER = '*Contagem de membros do Azerbaijão:*', SRİ_USER = '*Contagem de membros do Sri Lanka:*', RU_USER = '*Contagem de membros russos:*', USA_USER = '*Contagem de membros dos USA:*', OTHER = '*Contagem de outros membros:*', FR_USER = '*Contagem de membros franceses:*'
@@ -48,6 +49,7 @@ if (CON.WORKTYPE == 'private') {
             var admin_count = ' ' + jids.length + '\n'
             var user_count = ' ' +  users1.length + '\n'
             var tr_user = [];
+            var ma_user = [];
             var hi_user = [];
             var az_user = [];
             var sri_user = [];
@@ -58,6 +60,7 @@ if (CON.WORKTYPE == 'private') {
             region['participants'].map(async (reg) => {
                 if (reg.jid.startsWith('90')) { tr_user.push(reg.id.replace('c.us', 's.whatsapp.net'));
                 } if (reg.jid.startsWith('994')) { az_user.push(reg.id.replace('c.us', 's.whatsapp.net'));
+                } if (reg.jid.startsWith('212')) { ma_user.push(reg.id.replace('c.us', 's.whatsapp.net'));
                 } if (reg.jid.startsWith('91')) { hi_user.push(reg.id.replace('c.us', 's.whatsapp.net'));
                 } if (reg.jid.startsWith('94')) { sri_user.push(reg.id.replace('c.us', 's.whatsapp.net'));
                 } if (reg.jid.startsWith('7')) { ru_user.push(reg.id.replace('c.us', 's.whatsapp.net'));
@@ -66,6 +69,7 @@ if (CON.WORKTYPE == 'private') {
                 }
             });
             var trus = ' ' + tr_user.length + '\n'
+            var maus = ' ' + ma_user.length + '\n'
             var hius = ' ' + hi_user.length + '\n'
             var azus = ' ' + az_user.length + '\n'
             var srius = ' ' + sri_user.length + '\n'
@@ -73,7 +77,7 @@ if (CON.WORKTYPE == 'private') {
             var usaus = ' ' + usa_user.length + '\n'
             var frus = ' ' + fr_user.length + '\n'
             var oth = user_count - trus - hius - azus - srius - ruus - usaus - frus
-            const user_count_msg = ADMİN_USER + admin_count + USER_USER + user_count + TR_USER + trus + Hİ_USER + hius + AZ_USER + azus + SRİ_USER + srius + RU_USER + ruus + USA_USER + usaus + FR_USER + frus + OTHER + ' ' + oth + '\n'
+            const user_count_msg = ADMİN_USER + admin_count + USER_USER + user_count + MA + maus +  USA_USER + usaus + FR_USER + frus + TR_USER + trus + Hİ_USER + hius + AZ_USER + azus + SRİ_USER + srius + RU_USER + ruus + OTHER + ' ' + oth + '\n'
             const msg = `*Grup ID:* ${json.id} \n` + Lang.SUB + `${nwjson.subject} \n` + Lang.OWN + `${json.owner} \n` + Lang.COD + `${code} \n` + user_count_msg + Lang.DES + `\n\n${nwjson.desc}`
             var ppUrl = await message.client.getProfilePicture(message.jid) 
             if (ppUrl === undefined || ppUrl === null || ppUrl == '') {
