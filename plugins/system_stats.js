@@ -4,31 +4,83 @@ Licensed under the  GPL-3.0 License;
 you may not use this file except in compliance with the License.
 
 WhatsAsena - Yusuf Usta
+Developer & Co-Founder - Phaticusthiccy
 */
 
 const Asena = require('../events');
-const {MessageType} = require('@adiwajshing/baileys');
+const {MessageType, Mimetype, MessageOptions} = require('@adiwajshing/baileys');
 const {spawnSync} = require('child_process');
 const Config = require('../config');
-
+const chalk = require('chalk');
+const Axios = require('axios');
+const fs = require('fs')
 const Language = require('../language');
 const Lang = Language.getString('system_stats');
 
-Asena.addCommand({pattern: 'alive', fromMe: true, desc: Lang.ALIVE_DESC}, (async (message, match) => {
-    await message.sendMessage(
-        '```⚡ l AM FAST AS FUCK BOI ⚡```\n\n*🤴 Owner:*\nhttp://bit.ly/AmineSoukaraWhtsp\n\n*🤖 Version:*\n```'+Config.VERSION+'```\n*👥 Telegram Group:*\nhttps://t.me/DamienHelp\n*💬 Telegram Channel:*\nhttps://t.me/DamienSoukara\n*🗣 WhatsApp Group:*\nhttps://chat.whatsapp.com/F2kr4gafs6TDUY6JylMgbK' , MessageType.text
-    );
-}));
 
-Asena.addCommand({pattern: 'sysd', fromMe: true, desc: Lang.SYSD_DESC}, (async (message, match) => {
-    const child = spawnSync('neofetch', ['--stdout']).stdout.toString('utf-8')
-    await message.sendMessage(
-        '```' + child + '```', MessageType.text
-    );
-}));
+if (Config.WORKTYPE == 'private') {
 
-Asena.addCommand({pattern: 'rules', fromMe: true, desc: Lang.RULES}, (async (message, match) => {
-    await message.sendMessage(
-        '*OUR WHATSAPP  GROUP  RULES & GUIDELINES*\n\n\n✅ *Do’s – Practices which are appreciated*\n\n● Every member of this group are requested to maintain the decorum of this group so that this group can fulfill the purpose\n● Do regular study and jot-down important facts and post on group whenever you get free time , Everyone must write posts only those are relevant to the group subject.\nPlease also understand and value each others time. If any one feels this group is not suitable for them, they are free to leave the group. Helps admins accommodate better focused people.\n\n\n⛔ *Don’ts – Practices which are banned by Admins:*\n\n● No jokes/quotes/ Emojis/Gif/ Stickers.... or any other irrelevant things are not  allowed to post in this group\n● Do not post anything outside the topic,Do not spam or post any irrelevant messages in the group.\n● No group invite links, Members are prohibited from sharing external group invite links in the group. Only admins will do it as and when necessary.\n● Don’t initiate any direct conversation outside the group if you don’t know him/her personally. But if you need any help from other members, you can ask from admin.\n● No post/discussion in between 11PM to 6AM\nIn larger interest, members are expected to refrain from sending messages without any defined intent of conversation – For example: ‘Good Morning’, ‘Good Night’. We need to focus on quality of discussion and not quantity.\n\n😆 Wa Akhiran Gad Group For Fun bach Nghyroha Chwiya : https://chat.whatsapp.com/CAKRgjjyPU2CTYBkOtfl3h', MessageType.text
-    );
-}));
+    Asena.addCommand({pattern: 'alive', fromMe: true, desc: Lang.ALIVE_DESC}, (async (message, match) => {
+
+        if (Config.ALIVEMSG == 'default') {
+            await message.client.sendMessage(message.jid,'```Tanrı Türk\'ü Korusun. 🐺 Asena Hizmetinde!```\n\n*Version:* ```'+Config.VERSION+'```\n*Branch:* ```'+Config.BRANCH+'```\n*Telegram Group:* https://t.me/AsenaSupport\n*Telegram Channel:* https://t.me/asenaremaster\n*Plugin Channel:* ' + Config.CHANNEL , MessageType.text);
+        }
+        else {
+            var payload = Config.ALIVEMSG
+            const status = await message.client.getStatus()
+
+            if (payload.includes('{pp}')) {
+                const ppUrl = await message.client.getProfilePicture() 
+                const resim = await Axios.get(ppUrl, {responseType: 'arraybuffer'})
+                await message.client.sendMessage(message.jid, Buffer.from(resim.data), MessageType.image, { mimetype: Mimetype.png, caption: payload.replace('{version}', Config.VERSION).replace('{pp}', '').replace('{info}', `${status.status}`).replace('{plugin}', Config.CHANNEL)});
+            }
+            else if (payload.includes('{asenalogo}')) {
+                await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/media/gif/WhatsAsena Animated.mp4'), MessageType.video, { caption: payload.replace('{version}', Config.VERSION).replace('{pp}', '').replace('{info}', `${status.status}`).replace('{plugin}', Config.CHANNEL).replace('{asenalogo}', '')});
+            }
+            else {
+                await message.client.sendMessage(message.jid,payload.replace('{version}', Config.VERSION).replace('{info}', `${status.status}`).replace('{plugin}', Config.CHANNEL), MessageType.text);
+            }
+        }
+    }));
+
+    Asena.addCommand({pattern: 'sysd', fromMe: true, desc: Lang.SYSD_DESC}, (async (message, match) => {
+
+        const child = spawnSync('neofetch', ['--stdout']).stdout.toString('utf-8')
+        await message.sendMessage(
+            '```' + child + '```', MessageType.text
+        );
+    }));
+}
+else if (Config.WORKTYPE == 'public') {
+
+    Asena.addCommand({pattern: 'alive', fromMe: false, desc: Lang.ALIVE_DESC}, (async (message, match) => {
+
+        if (Config.ALIVEMSG == 'default') {
+            await message.client.sendMessage(message.jid,'```Tanrı Türk\'ü Korusun. 🐺 Asena Hizmetinde!```\n\n*Version:* ```'+Config.VERSION+'```\n*Branch:* ```'+Config.BRANCH+'```\n*Telegram Group:* https://t.me/AsenaSupport\n*Telegram Channel:* https://t.me/asenaremaster\n*Plugin Channel:* ' + Config.CHANNEL , MessageType.text);
+        }
+        else {
+            var payload = Config.ALIVEMSG
+            const status = await message.client.getStatus()
+
+            if (payload.includes('{pp}')) {
+                const ppUrl = await message.client.getProfilePicture() 
+                const resim = await Axios.get(ppUrl, {responseType: 'arraybuffer'})
+                await message.client.sendMessage(message.jid, Buffer.from(resim.data), MessageType.image, { mimetype: Mimetype.png, caption: payload.replace('{version}', Config.VERSION).replace('{pp}', '').replace('{info}', `${status.status}`).replace('{plugin}', Config.CHANNEL)});
+            }
+            else if (payload.includes('{asenalogo}')) {
+                await message.client.sendMessage(message.jid,fs.readFileSync('/root/WhatsAsenaDuplicated/media/gif/WhatsAsena Animated.mp4'), MessageType.video, { caption: payload.replace('{version}', Config.VERSION).replace('{pp}', '').replace('{info}', `${status.status}`).replace('{plugin}', Config.CHANNEL).replace('{asenalogo}', '')});
+            }
+            else {
+                await message.client.sendMessage(message.jid,payload.replace('{version}', Config.VERSION).replace('{info}', `${status.status}`).replace('{plugin}', Config.CHANNEL), MessageType.text);
+            }
+        }
+    }));
+
+    Asena.addCommand({pattern: 'sysd', fromMe: false, desc: Lang.SYSD_DESC}, (async (message, match) => {
+
+        const child = spawnSync('neofetch', ['--stdout']).stdout.toString('utf-8')
+        await message.sendMessage(
+            '```' + child + '```', MessageType.text
+        );
+    }));
+}

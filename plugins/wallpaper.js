@@ -1,404 +1,123 @@
-/* Codded by @
-Telegram: 
-Instagram: 
+/* Codded by @phaticusthiccy
+Telegram: t.me/phaticusthiccy
+Instagram: www.instagram.com/kyrie.baran
 
 Special Thanks:
-@ for Helps
+@Unique_hunter for Helps
 */
 
 const Asena = require('../events');
 const {MessageType, MessageOptions, Mimetype} = require('@adiwajshing/baileys');
 const axios = require('axios');
-
+const Config = require('../config');
+const request = require('request');
+const fs = require('fs');
+const exec = require('child_process').exec;
 const Language = require('../language');
 const Lang = Language.getString('wallpaper');
+let wk = Config.WORKTYPE == 'public' ? false : true
 
-Asena.addCommand({pattern: 'wallpaper', fromMe: true, desc: Lang.WP}, (async (message, match) => {
 
-    var r_text = new Array ();
+Asena.addCommand({pattern: 'wallpaper$', fromMe: wk, desc: Lang.WP}, (async (message, match) => {
+(function(_0x4baee3, _0x533c3a) {
+  var _0x421087 = _0x4baee3();
 
-    r_text[0] = "https://images.wallpaperscraft.com/image/trees_pines_lake_198439_4480x6720.jpg";
-    r_text[1] = "https://images.wallpaperscraft.com/image/trees_pines_mountains_160486_3648x5472.jpg";
-    r_text[2] = "https://images.wallpaperscraft.com/image/trees_pines_path_155613_5504x8256.jpg";
-    r_text[3] = "https://images.wallpaperscraft.com/image/trees_pines_sky_196842_2667x4000.jpg";
-    r_text[4] = "https://images.wallpaperscraft.com/image/rain_crowd_silhouettes_137826_4000x6000.jpg";
-    r_text[5] = "https://images.wallpaperscraft.com/image/night_city_aerial_view_buildings_198434_1350x2400.jpg";
-    r_text[6] = "https://images.wallpaperscraft.com/image/night_city_aerial_view_buildings_194665_1350x2400.jpg";
-    r_text[7] = "https://images.wallpaperscraft.com/image/night_city_aerial_view_buildings_147623_1350x2400.jpg";
-    r_text[8] = "https://images.wallpaperscraft.com/image/night_city_aerial_view_buildings_195654_1350x2400.jpg";
-    r_text[9] = "https://images.wallpaperscraft.com/image/glasses_hood_equipment_165388_3435x4668.jpg";
-    r_text[10] = "https://images.wallpaperscraft.com/image/glasses_notebook_pen_189578_6144x4098.jpg";
-    r_text[11] = "https://images.wallpaperscraft.com/image/glasses_portrait_aviator_162002_5600x3172.jpg";
-    r_text[12] = "https://images.wallpaperscraft.com/image/ford_mustang_nissan_gtr_cars_198306_3264x4928.jpg";
-    r_text[13] = "https://images.wallpaperscraft.com/image/ford_mustang_ford_cars_traffic_road_99460_2048x1420.jpg";
-    r_text[14] = "https://images.wallpaperscraft.com/image/ford_mustang_car_blue_194991_2832x4240.jpg";
-    r_text[15] = "https://images.wallpaperscraft.com/image/nebula_stars_space_198413_2160x2160.jpg";
-    r_text[16] = "https://images.wallpaperscraft.com/image/nebula_stars_space_189356_5150x3648.jpg";
-    r_text[17] = "https://images.wallpaperscraft.com/image/neon_light_long_exposure_198397_4000x6000.jpg";
-    r_text[18] = "https://images.wallpaperscraft.com/image/house_mountains_trees_198408_2160x3840.jpg";
-    r_text[19] = "https://images.wallpaperscraft.com/image/tower_skyscraper_architecture_198391_2160x3840.jpg";
-    r_text[20] = "https://images.wallpaperscraft.com/image/tower_skyscraper_backlight_124786_2160x3840.jpg";
-    r_text[21] = "https://images.wallpaperscraft.com/image/tower_skyscraper_architecture_135204_2160x3840.jpg";
-    r_text[22] = "https://images.wallpaperscraft.com/image/snow_trees_house_155516_2160x3840.jpg";
-    r_text[23] = "https://images.wallpaperscraft.com/image/snow_mountains_peaks_160678_2160x3840.jpg";
-    r_text[24] = "https://images.wallpaperscraft.com/image/snow_sun_landscape_147124_2160x3840.jpg";
-    r_text[25] = "https://images.wallpaperscraft.com/image/snow_branches_winter_134689_2160x3840.jpg";
-    r_text[26] = "https://images.wallpaperscraft.com/image/girl_space_anime_160127_2160x3840.jpg";
-    r_text[27] = "https://images.wallpaperscraft.com/image/girl_anime_hat_178724_2160x3840.jpg";
-    r_text[28] = "https://images.wallpaperscraft.com/image/girl_umbrella_anime_141156_2160x3840.jpg";
-    r_text[29] = "https://images.wallpaperscraft.com/image/silhouette_starry_sky_pillars_134464_2160x3840.jpg";
-    r_text[30] = "https://images.wallpaperscraft.com/image/silhouette_starry_sky_dark_165822_2160x3840.jpg";
-    r_text[31] = "https://images.wallpaperscraft.com/image/silhouette_starry_sky_stargazing_139774_2160x3840.jpg";
-    r_text[32] = "https://images.wallpaperscraft.com/image/face_mitt_inscription_bye_114113_6000x4000.jpg";
-    r_text[33] = "https://images.wallpaperscraft.com/image/face_paint_profile_abstraction_95073_1920x1080.jpg";
-    r_text[34] = "https://images.wallpaperscraft.com/image/face_paint_lips_burst_dark_61870_2560x1440.jpg";
-    r_text[35] = "https://images.wallpaperscraft.com/image/hologram_shimmering_colorful_198479_1350x2400.jpg";
-    r_text[36] = "https://images.wallpaperscraft.com/image/cave_puddle_reflection_198472_1350x2400.jpg";
-    r_text[37] = "https://images.wallpaperscraft.com/image/cave_rock_darkness_169378_1350x2400.jpg";
-    r_text[38] = "https://images.wallpaperscraft.com/image/cave_rock_light_151228_1350x2400.jpg";
-    r_text[39] = "https://images.wallpaperscraft.com/image/cave_rock_stones_158178_1350x2400.jpg";
-    r_text[40] = "https://images.wallpaperscraft.com/image/cyborg_mask_neon_161237_3840x2160.jpg";
-    r_text[41] = "https://images.wallpaperscraft.com/image/anonymous_mask_hood_198441_1350x2400.jpg";
-    r_text[42] = "https://images.wallpaperscraft.com/image/anonymous_mask_hood_157796_1350x2400.jpg";
-    r_text[43] = "https://images.wallpaperscraft.com/image/anonymous_mask_hood_144336_1350x2400.jpg";
-    r_text[44] = "https://images.wallpaperscraft.com/image/anonymous_mask_hood_140068_1350x2400.jpg";
-    r_text[45] = "https://images.wallpaperscraft.com/image/ball_planet_colorful_132216_1440x2560.jpg";
-    r_text[46] = "https://images.wallpaperscraft.com/image/ball_planet_silhouette_149189_1440x2560.jpg";
-    r_text[47] = "https://images.wallpaperscraft.com/image/ball_planet_hands_131055_1440x2560.jpg";
-    r_text[48] = "https://images.wallpaperscraft.com/image/ball_planet_shroud_136916_1440x2560.jpg";
-    r_text[49] = "https://images.wallpaperscraft.com/image/ball_glow_hand_190683_1440x2560.jpg";
-    r_text[50] = "https://images.wallpaperscraft.com/image/ball_hands_glow_166373_1440x2560.jpg";
-    r_text[51] = "https://images.wallpaperscraft.com/image/ball_glow_mask_140903_1440x2560.jpg";
-    r_text[52] = "https://images.wallpaperscraft.com/image/ball_glow_stone_169306_1440x2560.jpg";
-    r_text[53] = "https://images.wallpaperscraft.com/image/ball_glow_reflection_165921_4072x2697.jpg";
-    r_text[54] = "https://images.wallpaperscraft.com/image/ball_glow_silhouette_149491_1920x2304.jpg";
-    r_text[55] = "https://images.wallpaperscraft.com/image/ball_glow_line_light_28298_1680x1050.jpg";
-    r_text[56] = "https://images.wallpaperscraft.com/image/ball_circles_glow_168614_1440x2560.jpg";
-    r_text[57] = "https://images.wallpaperscraft.com/image/ball_circles_neon_137700_1440x2560.jpg";
-    r_text[58] = "https://images.wallpaperscraft.com/image/ball_neon_backlight_147061_1440x2560.jpg";
-    r_text[59] = "https://images.wallpaperscraft.com/image/ball_reflection_neon_168932_1440x2560.jpg";
-    r_text[60] = "https://images.wallpaperscraft.com/image/ball_reflection_hand_184546_1440x2560.jpg";
-    r_text[61] = "https://images.wallpaperscraft.com/image/crystal_ball_ball_hand_142442_1440x2560.jpg";
-    r_text[62] = "https://images.wallpaperscraft.com/image/building_water_minimalism_198457_3145x4718.jpg";
-    r_text[63] = "https://images.wallpaperscraft.com/image/triangle_inverted_black_white_92770_2560x1600.jpg";
-    r_text[64] = "https://images.wallpaperscraft.com/image/lamp_electricity_minimalism_128251_1440x2560.jpg";
-    r_text[65] = "https://images.wallpaperscraft.com/image/lamp_electricity_spiral_luminescence_120309_1440x2560.jpg";
-    r_text[66] = "https://images.wallpaperscraft.com/image/lamp_spiral_electricity_light_119929_1440x2560.jpg";
-    r_text[67] = "https://images.wallpaperscraft.com/image/skyscraper_building_architecture_sky_bottom_view_118409_1440x2560.jpg";
-    r_text[68] = "https://images.wallpaperscraft.com/image/skyscraper_bottom_view_building_187222_1440x2560.jpg";
-    r_text[69] = "https://images.wallpaperscraft.com/image/skyscraper_architecture_bottom_view_123571_1440x2560.jpg";
-    r_text[70] = "https://images.wallpaperscraft.com/image/skyscraper_architecture_bottom_view_136419_1440x2560.jpg";
-    r_text[71] = "https://images.wallpaperscraft.com/image/cherries_cherry_berry_122190_1440x2560.jpg";
-    r_text[72] = "https://images.wallpaperscraft.com/image/water_hand_sea_horizon_118181_1440x2560.jpg";
-    r_text[73] = "https://images.wallpaperscraft.com/image/water_hand_stones_148518_1440x2560.jpg";
-    r_text[74] = "https://images.wallpaperscraft.com/image/water_stream_flow_169694_1440x2560.jpg";
-    r_text[75] = "https://images.wallpaperscraft.com/image/water_horizon_dusk_175987_1440x2560.jpg";
-    r_text[76] = "https://images.wallpaperscraft.com/image/water_moon_dusk_191709_1440x2560.jpg";
-    r_text[77] = "https://images.wallpaperscraft.com/image/water_horizon_sky_164418_1440x2560.jpg";
-    r_text[78] = "https://images.wallpaperscraft.com/image/water_sky_horizon_140454_1440x2560.jpg";
-    r_text[79] = "https://images.wallpaperscraft.com/image/water_horizon_sunset_168843_1440x2560.jpg";
-    r_text[80] = "https://images.wallpaperscraft.com/image/moon_phases_black_175210_3648x5472.jpg";
-    r_text[81] = "https://images.wallpaperscraft.com/image/moon_black_sky_191125_2318x2864.jpg";
-    r_text[82] = "https://images.wallpaperscraft.com/image/stains_paint_mixing_198500_2160x3840.jpg";
-    r_text[83] = "https://images.wallpaperscraft.com/image/stains_paint_mixing_195514_2160x3840.jpg";
-    r_text[84] = "https://images.wallpaperscraft.com/image/stains_liquid_paint_191590_2160x3840.jpg";
-    r_text[85] = "https://images.wallpaperscraft.com/image/stains_liquid_paint_147522_2160x3840.jpg";
-    r_text[86] = "https://images.wallpaperscraft.com/image/stains_liquid_paint_151928_2160x3840.jpg";
-    r_text[87] = "https://images.wallpaperscraft.com/image/stains_abstraction_texture_157950_2160x3840.jpg";
-    r_text[88] = "https://images.wallpaperscraft.com/image/stains_paint_liquid_146393_2160x3840.jpg";
-    r_text[89] = "https://images.wallpaperscraft.com/image/girl_helmet_cyberpunk_194603_2160x3840.jpg";
-    r_text[90] = "https://images.wallpaperscraft.com/image/girl_alone_autumn_192003_2160x3840.jpg";
-    r_text[91] = "https://images.wallpaperscraft.com/image/girl_loneliness_alone_183388_2160x3840.jpg";
-    r_text[92] = "https://images.wallpaperscraft.com/image/girl_silhouette_loneliness_177299_2160x3840.jpg";
-    r_text[93] = "https://images.wallpaperscraft.com/image/car_glaciers_scifi_137640_1440x2560.jpg";
-    r_text[94] = "https://images.wallpaperscraft.com/image/unicorn_wings_horse_125631_1440x2560.jpg";
-    r_text[95] = "https://images.wallpaperscraft.com/image/surrealism_man_door_126312_1440x2560.jpg";
-    r_text[96] = "https://images.wallpaperscraft.com/image/surrealism_astronaut_art_121819_1440x2560.jpg";
-    r_text[97] = "https://images.wallpaperscraft.com/image/astronaut_giant_art_142663_1440x2560.jpg";
-    r_text[98] = "https://images.wallpaperscraft.com/image/astronaut_spaceship_space_147409_1440x2560.jpg";
-    r_text[99] = "https://images.wallpaperscraft.com/image/astronaut_cosmonaut_art_131212_1440x2560.jpg";
-    r_text[100] = "https://images.wallpaperscraft.com/image/anonymous_mask_hood_140068_1350x2400.jpg";
-    r_text[101] = "https://images.wallpaperscraft.com/image/moon_clouds_sky_198436_1600x1200.jpg";
-    r_text[102] = "https://images.wallpaperscraft.com/image/moon_clouds_night_134255_1350x2400.jpg";
-    r_text[103] = "https://images.wallpaperscraft.com/image/planet_clouds_light_star_94996_1280x1024.jpg";
-    r_text[104] = "https://images.wallpaperscraft.com/image/couple_starry_sky_art_123338_1350x2400.jpg";
-    r_text[105] = "https://images.wallpaperscraft.com/image/drops_dew_petal_90137_1280x1280.jpg";
-    r_text[106] = "https://images.wallpaperscraft.com/image/wolf_silhouette_moon_night_118727_1280x1280.jpg";
-    r_text[107] = "https://images.wallpaperscraft.com/image/wolf_moon_night_150508_3415x3415.jpg";
-    r_text[108] = "https://images.wallpaperscraft.com/image/neon_lettering_rainbow_128663_3415x3415.jpg";
-    r_text[109] = "https://images.wallpaperscraft.com/image/neon_lettering_rainbow_128663_3415x3415.jpg";
-    r_text[110] = "https://images.wallpaperscraft.com/image/tree_planet_stars_galaxy_art_117068_2780x2780.jpg";
-    r_text[111] = "https://images.wallpaperscraft.com/image/ball_fire_football_122318_3415x3415.jpg";
-    r_text[112] = "https://images.wallpaperscraft.com/image/ball_texture_volume_196647_3415x3415.jpg";
-    r_text[113] = "https://images.wallpaperscraft.com/image/keyboard_backlight_light_159518_1280x1280.jpg";
-    r_text[114] = "https://images.wallpaperscraft.com/image/keyboard_key_backlight_128828_1350x2400.jpg";
-    r_text[115] = "https://images.wallpaperscraft.com/image/headphones_keyboard_audio_129691_3415x3415.jpg";
-    r_text[116] = "https://images.wallpaperscraft.com/image/cube_figure_dark_142157_1280x1280.jpg";
-    r_text[117] = "https://images.wallpaperscraft.com/image/cat_eyes_blue_143433_1350x2400.jpg";
-    r_text[118] = "https://images.wallpaperscraft.com/image/city_night_panorama_117682_3415x3415.jpg";
-    r_text[119] = "https://images.wallpaperscraft.com/image/city_night_buildings_192988_3415x3415.jpg";
-    r_text[120] = "https://images.wallpaperscraft.com/image/city_night_buildings_183963_3415x3415.jpg";
-    r_text[121] = "https://images.wallpaperscraft.com/image/city_night_aerial_view_157260_3415x3415.jpg";
-    r_text[122] = "https://images.wallpaperscraft.com/image/city_night_aerial_view_191587_3415x3415.jpg";
-    r_text[123] = "https://images.wallpaperscraft.com/image/coffee_mug_chair_124443_2780x2780.jpg";
-    r_text[124] = "https://images.wallpaperscraft.com/image/coffee_mug_hands_132301_2780x2780.jpg";
-    r_text[125] = "https://images.wallpaperscraft.com/image/puppy_husky_down_cute_53643_1280x1280.jpg";
-    r_text[126] = "https://images.wallpaperscraft.com/image/cat_lying_kitten_playful_91882_1024x768.jpg";
-    r_text[127] = "https://images.wallpaperscraft.com/image/cat_lying_tongue_playful_glass_striped_26572_1280x1280.jpg";
-    r_text[128] = "https://images.wallpaperscraft.com/image/match_fire_macro_198486_1280x1280.jpg";
-    r_text[129] = "https://images.wallpaperscraft.com/image/match_smoke_macro_133503_3415x3415.jpg";
-    r_text[130] = "https://images.wallpaperscraft.com/image/smoke_hood_silhouette_128612_3415x3415.jpg";
-    r_text[131] = "https://images.wallpaperscraft.com/image/silhouette_hood_sunset_155194_3415x3415.jpg";
-    r_text[132] = "https://images.wallpaperscraft.com/image/silhouette_sunset_dark_141637_3415x3415.jpg";
-    r_text[133] = "https://images.wallpaperscraft.com/image/stairs_building_tower_198497_3415x3415.jpg";
-    r_text[134] = "https://images.wallpaperscraft.com/image/forest_fog_trees_126479_3415x3415.jpg";
-    r_text[135] = "https://images.wallpaperscraft.com/image/forest_fog_trees_173667_3415x3415.jpg";
-    r_text[136] = "https://images.wallpaperscraft.com/image/tree_christmas_new_year_132207_3415x3415.jpg";
-    r_text[137] = "https://images.wallpaperscraft.com/image/tree_decorations_balls_195401_3415x3415.jpg";
-    r_text[138] = "https://images.wallpaperscraft.com/image/book_ring_heart_love_118982_3415x3415.jpg";
-    r_text[139] = "https://images.wallpaperscraft.com/image/book_inscription_motivation_195284_3415x3415.jpg";
-    r_text[140] = "https://images.wallpaperscraft.com/image/book_branch_dark_165540_3415x3415.jpg";
-    r_text[141] = "https://images.wallpaperscraft.com/image/book_cup_coffee_155045_3415x3415.jpg";
-    r_text[142] = "https://images.wallpaperscraft.com/image/book_bouquet_cup_147482_3415x3415.jpg";
-    r_text[143] = "https://images.wallpaperscraft.com/image/glass_lemon_spray_122158_1350x2400.jpg";
-    r_text[144] = "https://images.wallpaperscraft.com/image/glass_drops_spray_162357_1350x2400.jpg";
-    r_text[145] = "https://images.wallpaperscraft.com/image/glass_drops_macro_195219_1350x2400.jpg";
-    r_text[146] = "https://images.wallpaperscraft.com/image/snowflake_pattern_structure_ice_119262_1350x2400.jpg";
-    r_text[147] = "https://images.wallpaperscraft.com/image/snowflake_macro_pattern_162125_1350x2400.jpg";
-    r_text[148] = "https://images.wallpaperscraft.com/image/snowflake_decoration_white_196180_1350x2400.jpg";
-    r_text[149] = "https://images.wallpaperscraft.com/image/couple_hands_love_tenderness_coffee_118921_3415x3415.jpg";
-    r_text[150] = "https://images.wallpaperscraft.com/image/couple_kiss_tenderness_135381_3415x3415.jpg";
-    r_text[151] = "https://images.wallpaperscraft.com/image/couple_kiss_romance_love_116829_3415x3415.jpg";
-    r_text[152] = "https://images.wallpaperscraft.com/image/motorcyclist_motorcycle_sunset_121025_1280x1280.jpg";
-    r_text[153] = "https://images.wallpaperscraft.com/image/motorcyclist_motorcycle_helmet_186641_1280x1280.jpg";
-    r_text[154] = "https://images.wallpaperscraft.com/image/motorcyclist_motorcycle_helmet_171640_1280x1280.jpg";
-    r_text[155] = "https://images.wallpaperscraft.com/image/headphones_books_education_121501_3415x3415.jpg";
-    r_text[156] = "https://images.wallpaperscraft.com/image/headphones_metallic_silver_139878_3415x3415.jpg";
-    r_text[157] = "https://images.wallpaperscraft.com/image/ship_sea_sunset_moon_63381_1600x1200.jpg";
-    r_text[158] = "https://images.wallpaperscraft.com/image/ship_mast_sunset_sea_116168_1600x1200.jpg";
-    r_text[159] = "https://images.wallpaperscraft.com/image/ship_sun_sunset_165669_1600x1200.jpg";
-    r_text[160] = "https://images.wallpaperscraft.com/image/ship_sunset_spray_168736_2780x2780.jpg";
-    r_text[161] = "https://images.wallpaperscraft.com/image/ship_sea_sunset_shore_115026_2780x2780.jpg";
-    r_text[162] = "https://images.wallpaperscraft.com/image/smile_inscription_hand_hello_118043_3415x3415.jpg";
-    r_text[163] = "https://images.wallpaperscraft.com/image/smile_smiley_ball_184348_3415x3415.jpg";
-    r_text[164] = "https://images.wallpaperscraft.com/image/smile_happiness_ball_125063_3415x3415.jpg";
-    r_text[165] = "https://images.wallpaperscraft.com/image/flower_pink_petals_bud_close_up_119905_1280x1280.jpg";
-    r_text[166] = "https://images.wallpaperscraft.com/image/rose_flower_close_up_petals_119252_3415x3415.jpg";
-    r_text[167] = "https://images.wallpaperscraft.com/image/rose_flower_petals_179553_3415x3415.jpg";
-    r_text[168] = "https://images.wallpaperscraft.com/image/rose_flower_red_150623_3415x3415.jpg";
-    r_text[169] = "https://images.wallpaperscraft.com/image/rose_flower_red_148978_3415x3415.jpg";
-    r_text[170] = "https://images.wallpaperscraft.com/image/unicorn_water_forest_night_magic_68838_1280x1280.jpg";
-    r_text[171] = "https://images.wallpaperscraft.com/image/forest_water_spruce_163253_1280x1280.jpg";
-    r_text[172] = "https://images.wallpaperscraft.com/image/deer_planet_art_129712_1280x1280.jpg";
-    r_text[173] = "https://images.wallpaperscraft.com/image/deer_art_wildlife_121850_1280x1280.jpg";
-    r_text[174] = "https://images.wallpaperscraft.com/image/car_sports_car_neon_157154_1280x1280.jpg";
-    r_text[175] = "https://images.wallpaperscraft.com/image/car_sportscar_neon_156622_1280x1280.jpg";
-    r_text[176] = "https://images.wallpaperscraft.com/image/car_sportscar_road_156718_1600x1200.jpg";
-    r_text[177] = "https://images.wallpaperscraft.com/image/lane_night_dark_139408_2780x2780.jpg";
-    r_text[178] = "https://images.wallpaperscraft.com/image/night_moon_dark_146181_2780x2780.jpg";
-    r_text[179] = "https://images.wallpaperscraft.com/image/ladder_purple_light_118353_1350x2400.jpg";
-    r_text[180] = "https://images.wallpaperscraft.com/image/ladder_forest_bamboo_195758_1350x2400.jpg";
-    r_text[181] = "https://images.wallpaperscraft.com/image/pluto_planet_dwarf_planet_trans_neptunian_objects_news_97479_1400x1050.jpg";
-    r_text[182] = "https://images.wallpaperscraft.com/image/snowboarding_trick_jump_snow_99047_1280x1280.jpg";
-    r_text[183] = "https://images.wallpaperscraft.com/image/snowboarding_snowboarder_mountain_snow_slope_110491_1280x1280.jpg";
-    r_text[184] = "https://images.wallpaperscraft.com/image/hologram_scheme_scifi_139294_2780x2780.jpg";
-    r_text[185] = "https://images.wallpaperscraft.com/image/night_city_buildings_aerial_view_198465_3415x3415.jpg";
-    r_text[186] = "https://images.wallpaperscraft.com/image/night_city_buildings_aerial_view_156134_3415x3415.jpg";
-    r_text[187] = "https://images.wallpaperscraft.com/image/night_city_buildings_aerial_view_151198_3415x3415.jpg";
-    r_text[188] = "https://images.wallpaperscraft.com/image/ladybug_drop_surface_106249_1280x1280.jpg";
-    r_text[189] = "https://images.wallpaperscraft.com/image/ladybug_grass_macro_190135_1280x1280.jpg";
-    r_text[190] = "https://images.wallpaperscraft.com/image/coffee_grill_cup_110673_3415x3415.jpg";
-    r_text[191] = "https://images.wallpaperscraft.com/image/coffee_cup_spoons_191170_3415x3415.jpg";
-    r_text[192] = "https://images.wallpaperscraft.com/image/train_subway_underground_120794_3415x3415.jpg";
-    r_text[193] = "https://images.wallpaperscraft.com/image/train_railway_buildings_175616_3415x3415.jpg";
-    r_text[194] = "https://images.wallpaperscraft.com/image/train_railway_forest_169685_3415x3415.jpg";
-    r_text[195] = "https://images.wallpaperscraft.com/image/cosmonaut_space_suit_multicolored_123724_2780x2780.jpg";
-    r_text[196] = "https://images.wallpaperscraft.com/image/city_art_retrowave_143233_1280x1280.jpg";
-    r_text[197] = "https://images.wallpaperscraft.com/image/city_art_sky_127834_1280x1280.jpg";
-    r_text[198] = "https://images.wallpaperscraft.com/image/city_fantasy_art_140441_1280x1280.jpg";
-    r_text[199] = "https://images.wallpaperscraft.com/image/city_architecture_buildings_191290_1280x1280.jpg";
-    r_text[200] = "https://images.wallpaperscraft.com/image/city_road_cars_185798_1280x1280.jpg";
-    r_text[201] = "https://images.wallpaperscraft.com/image/aquilegia_flower_pink_198372_1350x2400.jpg";
-    r_text[202] = "https://images.wallpaperscraft.com/image/ice_drop_macro_198291_1350x2400.jpg";
-    r_text[203] = "https://images.wallpaperscraft.com/image/plant_succulent_leaves_198231_1350x2400.jpg";
-    r_text[204] = "https://images.wallpaperscraft.com/image/bike_cyclist_spray_194016_1350x2400.jpg";
-    r_text[205] = "https://images.wallpaperscraft.com/image/football_field_aerial_view_football_196247_1350x2400.jpg";
-    r_text[206] = "https://images.wallpaperscraft.com/image/surfer_surfing_water_193190_1350x2400.jpg";
-    r_text[207] = "https://images.wallpaperscraft.com/image/basketball_basketball_backboard_net_186633_1350x2400.jpg";
-    r_text[208] = "https://images.wallpaperscraft.com/image/surfing_waves_sea_178352_1350x2400.jpg";
-    r_text[209] = "https://images.wallpaperscraft.com/image/brick_wall_wall_red_177161_1350x2400.jpg";
-    r_text[210] = "https://images.wallpaperscraft.com/image/snowboarder_snowboard_slope_175058_1350x2400.jpg";
-    r_text[211] = "https://images.wallpaperscraft.com/image/bicycle_tourist_cyclist_176697_1350x2400.jpg";
-    r_text[212] = "https://images.wallpaperscraft.com/image/construction_concrete_architecture_198318_1350x2400.jpg";
-    r_text[213] = "https://images.wallpaperscraft.com/image/waves_sand_surface_198035_1350x2400.jpg";
-    r_text[214] = "https://images.wallpaperscraft.com/image/wall_brick_white_197530_1350x2400.jpg";
-    r_text[215] = "https://images.wallpaperscraft.com/image/laptop_backlight_colorful_194324_1350x2400.jpg";
-    r_text[216] = "https://images.wallpaperscraft.com/image/mask_totem_smoke_192795_1350x2400.jpg";
-    r_text[217] = "https://images.wallpaperscraft.com/image/code_programming_text_169456_1350x2400.jpg";
-    r_text[218] = "https://images.wallpaperscraft.com/image/code_text_programming_146694_1350x2400.jpg";
-    r_text[219] = "https://images.wallpaperscraft.com/image/air_balloon_smiley_smile_156188_1350x2400.jpg";
-    r_text[220] = "https://images.wallpaperscraft.com/image/balloon_smiley_smile_126654_1350x2400.jpg";
-    r_text[221] = "https://images.wallpaperscraft.com/image/balloon_heart_ball_174468_1350x2400.jpg";
-    r_text[222] = "https://images.wallpaperscraft.com/image/smile_smiley_sad_156138_1350x2400.jpg";
-    r_text[223] = "https://images.wallpaperscraft.com/image/heart_love_colorful_183687_1350x2400.jpg";
-    r_text[224] = "https://images.wallpaperscraft.com/image/love_silhouette_fireworks_178667_1350x2400.jpg";
-    r_text[225] = "https://images.wallpaperscraft.com/image/silhouette_sunset_birds_145330_1350x2400.jpg";
-    r_text[226] = "https://images.wallpaperscraft.com/image/silhouette_love_sunset_174077_1350x2400.jpg";
-    r_text[227] = "https://images.wallpaperscraft.com/image/twilight_evening_snow_135246_1350x2400.jpg";
-    r_text[228] = "https://images.wallpaperscraft.com/image/twilight_dark_moon_147499_1350x2400.jpg";
-    r_text[229] = "https://images.wallpaperscraft.com/image/fireworks_night_mountains_198047_1350x2400.jpg";
-    r_text[230] = "https://images.wallpaperscraft.com/image/fireworks_sparks_red_197506_1350x2400.jpg";
-    r_text[231] = "https://images.wallpaperscraft.com/image/fireworks_salute_sparks_137774_1350x2400.jpg";
-    r_text[232] = "https://images.wallpaperscraft.com/image/fireworks_sparks_colorful_196732_1350x2400.jpg";
-    r_text[233] = "https://images.wallpaperscraft.com/image/fireworks_sparks_colorful_196102_1350x2400.jpg";
-    r_text[234] = "https://images.wallpaperscraft.com/image/fireworks_sparks_holiday_135883_1350x2400.jpg";
-    r_text[235] = "https://images.wallpaperscraft.com/image/fireworks_sparks_yellow_197597_1350x2400.jpg";
-    r_text[236] = "https://images.wallpaperscraft.com/image/mugs_hot_chocolate_marshmallow_198277_1350x2400.jpg";
-    r_text[237] = "https://images.wallpaperscraft.com/image/mugs_tea_camping_123511_1350x2400.jpg";
-    r_text[238] = "https://images.wallpaperscraft.com/image/camping_bonfire_firewood_176339_1350x2400.jpg";
-    r_text[239] = "https://images.wallpaperscraft.com/image/camping_tent_forest_186906_1350x2400.jpg";
-    r_text[240] = "https://images.wallpaperscraft.com/image/acoustic_guitar_guitar_musical_instrument_198075_1350x2400.jpg";
-    r_text[241] = "https://images.wallpaperscraft.com/image/guitar_musical_instrument_neon_196631_1350x2400.jpg";
-    r_text[242] = "https://images.wallpaperscraft.com/image/speakers_speaker_music_196514_1350x2400.jpg";
-    r_text[243] = "https://images.wallpaperscraft.com/image/anime_schoolgirl_uniform_120955_1080x1920.jpg";
-    r_text[244] = "https://images.wallpaperscraft.com/image/anime_girl_leaves_162517_1080x1920.jpg";
-    r_text[245] = "https://images.wallpaperscraft.com/image/girl_anime_wind_188165_1080x1920.jpg";
-    r_text[246] = "https://images.wallpaperscraft.com/image/girl_anime_guitar_184800_1080x1920.jpg";
-    r_text[247] = "https://images.wallpaperscraft.com/image/girl_guitar_anime_141048_1080x1920.jpg";
-    r_text[247] = "https://images.wallpaperscraft.com/image/buildings_river_snow_198357_1350x2400.jpg";
-    r_text[248] = "https://images.wallpaperscraft.com/image/ferris_wheel_buildings_skyscrapers_198273_1350x2400.jpg";
-    r_text[249] = "https://images.wallpaperscraft.com/image/plane_trail_sky_197126_1350x2400.jpg";
-    r_text[250] = "https://images.wallpaperscraft.com/image/arrow_pointer_wall_196731_1350x2400.jpg";
-    r_text[251] = "https://images.wallpaperscraft.com/image/tower_building_architecture_196271_1350x2400.jpg";
-    r_text[252] = "https://images.wallpaperscraft.com/image/exit_sign_text_198303_1350x2400.jpg";
-    r_text[253] = "https://images.wallpaperscraft.com/image/text_neon_word_197314_1350x2400.jpg";
-    r_text[254] = "https://images.wallpaperscraft.com/image/text_neon_red_197382_1350x2400.jpg";
-    r_text[255] = "https://images.wallpaperscraft.com/image/text_neon_glow_154000_1350x2400.jpg";
-    r_text[256] = "https://images.wallpaperscraft.com/image/lines_light_long_exposure_198464_1350x2400.jpg";
-    r_text[257] = "https://images.wallpaperscraft.com/image/ripples_distortion_glitch_198376_1350x2400.jpg";
-    r_text[258] = "https://images.wallpaperscraft.com/image/glare_circles_bokeh_196930_1350x2400.jpg";
-    r_text[259] = "https://images.wallpaperscraft.com/image/glare_drops_glass_184778_1350x2400.jpg";
-    r_text[260] = "https://images.wallpaperscraft.com/image/glare_bokeh_glass_135378_1350x2400.jpg";
-    r_text[261] = "https://images.wallpaperscraft.com/image/glare_drops_glass_182121_1350x2400.jpg";
-    r_text[262] = "https://images.wallpaperscraft.com/image/paint_glitter_glow_198154_1350x2400.jpg";
-    r_text[263] = "https://images.wallpaperscraft.com/image/neon_light_lines_198013_1350x2400.jpg";
-    r_text[264] = "https://images.wallpaperscraft.com/image/paint_stains_spots_197765_1350x2400.jpg";
-    r_text[265] = "https://images.wallpaperscraft.com/image/paint_liquid_stains_197801_1350x2400.jpg";
-    r_text[266] = "https://images.wallpaperscraft.com/image/waves_blur_distortion_197664_1350x2400.jpg";
-    r_text[267] = "https://images.wallpaperscraft.com/image/light_blur_long_exposure_197601_1350x2400.jpg";
-    r_text[268] = "https://images.wallpaperscraft.com/image/paint_stains_colorful_197490_1350x2400.jpg";
-    r_text[269] = "https://images.wallpaperscraft.com/image/lines_light_long_exposure_197743_1350x2400.jpg";
-    r_text[270] = "https://images.wallpaperscraft.com/image/fractal_kaleidoscope_abstraction_197190_1350x2400.jpg";
-    r_text[271] = "https://images.wallpaperscraft.com/image/fractal_kaleidoscope_symmetry_145575_1350x2400.jpg";
-    r_text[272] = "https://images.wallpaperscraft.com/image/fractal_kaleidoscope_symmetry_143804_1350x2400.jpg";
-    r_text[273] = "https://images.wallpaperscraft.com/image/stains_paint_mixing_197137_1350x2400.jpg";
-    r_text[274] = "https://images.wallpaperscraft.com/image/girl_outfit_hat_188185_1350x2400.jpg";
-    r_text[275] = "https://images.wallpaperscraft.com/image/girl_shell_hare_167320_1350x2400.jpg";
-    r_text[276] = "https://images.wallpaperscraft.com/image/piano_silhouette_space_156662_1350x2400.jpg";
-    r_text[277] = "https://images.wallpaperscraft.com/image/girl_umbrella_rain_151317_1350x2400.jpg";
-    r_text[278] = "https://images.wallpaperscraft.com/image/girl_bike_night_140306_1350x2400.jpg";
-    r_text[279] = "https://images.wallpaperscraft.com/image/girl_kitten_flower_141058_1350x2400.jpg";
-    r_text[280] = "https://images.wallpaperscraft.com/image/guy_anime_computer_tears_sadness_room_96990_1350x2400.jpg";
-    r_text[281] = "https://images.wallpaperscraft.com/image/girl_silhouette_water_143788_1350x2400.jpg";
-    r_text[282] = "https://images.wallpaperscraft.com/image/girl_silhouette_flame_188312_1350x2400.jpg";
-    r_text[283] = "https://images.wallpaperscraft.com/image/girl_silhouette_dark_158863_1350x2400.jpg";
-    r_text[284] = "https://images.wallpaperscraft.com/image/girl_silhouette_cave_188345_1350x2400.jpg";
-    r_text[285] = "https://images.wallpaperscraft.com/image/girl_silhouette_sunset_181444_1350x2400.jpg";
-    r_text[286] = "https://images.wallpaperscraft.com/image/girl_silhouette_balloon_161854_1350x2400.jpg";
-    r_text[287] = "https://images.wallpaperscraft.com/image/girl_silhouette_tree_198492_1350x2400.jpg";
-    r_text[288] = "https://images.wallpaperscraft.com/image/girl_tree_alone_184155_1350x2400.jpg";
-    r_text[289] = "https://images.wallpaperscraft.com/image/girl_cat_art_120828_1350x2400.jpg";
-    r_text[290] = "https://images.wallpaperscraft.com/image/girl_art_cat_132215_1350x2400.jpg";
-    r_text[291] = "https://images.wallpaperscraft.com/image/girl_art_hair_135305_1350x2400.jpg";
-    r_text[292] = "https://images.wallpaperscraft.com/image/girl_hat_hair_188730_1350x2400.jpg";
-    r_text[293] = "https://images.wallpaperscraft.com/image/girl_hat_grass_163162_1350x2400.jpg";
-    r_text[294] = "https://images.wallpaperscraft.com/image/girl_grass_field_179538_1350x2400.jpg";
-    r_text[295] = "https://images.wallpaperscraft.com/image/girl_lights_grass_163914_1350x2400.jpg";
-    r_text[296] = "https://images.wallpaperscraft.com/image/girl_field_wind_122296_1350x2400.jpg";
-    r_text[297] = "https://images.wallpaperscraft.com/image/lines_stripes_black_195706_1350x2400.jpg";
-    r_text[298] = "https://images.wallpaperscraft.com/image/lines_stripes_neon_174447_1350x2400.jpg";
-    r_text[299] = "https://images.wallpaperscraft.com/image/lines_stripes_neon_175902_1350x2400.jpg";
-    r_text[300] = "https://images.wallpaperscraft.com/image/lines_neon_glow_155236_1350x2400.jpg";
-    r_text[301] = "https://images.wallpaperscraft.com/image/lines_stripes_glow_173235_1350x2400.jpg";
-    r_text[302] = "https://images.wallpaperscraft.com/image/lines_stripes_neon_136043_1350x2400.jpg";
-    r_text[303] = "https://images.wallpaperscraft.com/image/circles_rotation_red_136932_1350x2400.jpg";
-    r_text[304] = "https://images.wallpaperscraft.com/image/circles_rotation_shadow_background_46830_1350x2400.jpg";
-    r_text[305] = "https://images.wallpaperscraft.com/image/circles_rotation_immersion_124444_1350x2400.jpg";
-    r_text[306] = "https://images.wallpaperscraft.com/image/universe_galaxy_multicolored_125246_1350x2400.jpg";
-    r_text[307] = "https://images.wallpaperscraft.com/image/galaxy_universe_stars_132413_1350x2400.jpg";
-    r_text[308] = "https://images.wallpaperscraft.com/image/galaxy_universe_stars_186396_1350x2400.jpg";
-    r_text[309] = "https://images.wallpaperscraft.com/image/galaxy_stars_space_183942_1350x2400.jpg";
-    r_text[310] = "https://images.wallpaperscraft.com/image/escalator_stairs_legs_198435_1350x2400.jpg";
-    r_text[311] = "https://images.wallpaperscraft.com/image/escalator_stairs_room_169068_1350x2400.jpg";
-    r_text[312] = "https://images.wallpaperscraft.com/image/escalator_stairs_steps_186414_1350x2400.jpg";
-    r_text[313] = "https://images.wallpaperscraft.com/image/escalator_stairs_room_134388_1350x2400.jpg";
-    r_text[314] = "https://images.wallpaperscraft.com/image/airplane_forest_aerial_view_198311_1350x2400.jpg";
-    r_text[315] = "https://images.wallpaperscraft.com/image/forest_trees_aerial_view_172673_1350x2400.jpg";
-    r_text[316] = "https://images.wallpaperscraft.com/image/forest_trees_aerial_view_151178_1350x2400.jpg";
-    r_text[317] = "https://images.wallpaperscraft.com/image/kayak_boat_aerial_view_198191_1350x2400.jpg";
-    r_text[318] = "https://images.wallpaperscraft.com/image/boat_kayak_sea_173969_1350x2400.jpg";
-    r_text[319] = "https://images.wallpaperscraft.com/image/boat_sea_beach_171745_1350x2400.jpg";
-    r_text[320] = "https://images.wallpaperscraft.com/image/sea_beach_boat_144603_1350x2400.jpg";
-    r_text[321] = "https://images.wallpaperscraft.com/image/boat_beach_sea_175079_1350x2400.jpg";
-    r_text[322] = "https://images.wallpaperscraft.com/image/boat_sea_sunset_water_shine_118003_1350x2400.jpg";
-    r_text[323] = "https://images.wallpaperscraft.com/image/boat_sunset_sea_182192_1350x2400.jpg";
-    r_text[324] = "https://images.wallpaperscraft.com/image/boat_sea_ocean_130523_1350x2400.jpg";
-    r_text[325] = "https://images.wallpaperscraft.com/image/boat_sea_sky_170282_1350x2400.jpg";
-    r_text[326] = "https://images.wallpaperscraft.com/image/boat_sea_ocean_130523_1350x2400.jpg";
-    r_text[327] = "https://images.wallpaperscraft.com/image/lamp_floor_lamp_grass_198123_1350x2400.jpg";
-    r_text[328] = "https://images.wallpaperscraft.com/image/lamp_bw_black_185439_1350x2400.jpg";
-    r_text[329] = "https://images.wallpaperscraft.com/image/lamp_blinds_bw_188003_1350x2400.jpg";
-    r_text[330] = "https://images.wallpaperscraft.com/image/lamp_sparks_glow_179141_1350x2400.jpg";
-    r_text[331] = "https://images.wallpaperscraft.com/image/lamp_glow_dark_187450_1350x2400.jpg";
-    r_text[332] = "https://images.wallpaperscraft.com/image/lamp_glow_dark_186870_1350x2400.jpg";
-    r_text[333] = "https://images.wallpaperscraft.com/image/lamp_glow_neon_183277_1350x2400.jpg";
-    r_text[334] = "https://images.wallpaperscraft.com/image/lamp_neon_glow_182840_1350x2400.jpg";
-    r_text[335] = "https://images.wallpaperscraft.com/image/lamp_glow_neon_179705_1350x2400.jpg";
-    r_text[336] = "https://images.wallpaperscraft.com/image/lamp_glow_wall_166063_1350x2400.jpg";
-    r_text[337] = "https://images.wallpaperscraft.com/image/lamp_glow_leaves_176525_1350x2400.jpg";
-    r_text[338] = "https://images.wallpaperscraft.com/image/lamp_neon_glow_178661_1350x2400.jpg";
-    r_text[339] = "https://images.wallpaperscraft.com/image/man_loneliness_ferris_wheel_197976_1350x2400.jpg";
-    r_text[340] = "https://images.wallpaperscraft.com/image/man_alone_loneliness_184162_1350x2400.jpg";
-    r_text[341] = "https://images.wallpaperscraft.com/image/man_loneliness_lonely_186593_1350x2400.jpg";
-    r_text[342] = "https://images.wallpaperscraft.com/image/man_loneliness_alone_180150_1350x2400.jpg";
-    r_text[343] = "https://images.wallpaperscraft.com/image/man_loneliness_alone_179285_1350x2400.jpg";
-    r_text[344] = "https://images.wallpaperscraft.com/image/man_loneliness_alone_186784_1350x2400.jpg";
-    r_text[345] = "https://images.wallpaperscraft.com/image/leaf_neon_palm_130066_1350x2400.jpg";
-    r_text[346] = "https://images.wallpaperscraft.com/image/car_neon_movement_129990_1350x2400.jpg";
-    r_text[347] = "https://images.wallpaperscraft.com/image/car_retro_art_137996_1350x2400.jpg";
-    r_text[348] = "https://images.wallpaperscraft.com/image/car_retro_salon_183431_1350x2400.jpg";
-    r_text[349] = "https://images.wallpaperscraft.com/image/car_retro_vintage_194425_1350x2400.jpg";
-    r_text[350] = "https://images.wallpaperscraft.com/image/car_retro_vintage_180160_1350x2400.jpg";
-    r_text[351] = "https://images.wallpaperscraft.com/image/car_mirror_neon_164703_1350x2400.jpg";
-    r_text[352] = "https://images.wallpaperscraft.com/image/car_mirror_dark_148206_1350x2400.jpg";
-    r_text[353] = "https://images.wallpaperscraft.com/image/car_dark_art_141424_1350x2400.jpg";
-    r_text[354] = "https://images.wallpaperscraft.com/image/car_lights_road_168747_1350x2400.jpg";
-    r_text[355] = "https://images.wallpaperscraft.com/image/silhouette_cube_neon_131106_1350x2400.jpg";
-    r_text[356] = "https://images.wallpaperscraft.com/image/silhouette_neon_glow_140485_1350x2400.jpg";
-    r_text[357] = "https://images.wallpaperscraft.com/image/silhouette_glow_passage_168375_1350x2400.jpg";
-    r_text[358] = "https://images.wallpaperscraft.com/image/silhouette_ball_glow_140012_1350x2400.jpg";
-    r_text[359] = "https://images.wallpaperscraft.com/image/silhouette_ruins_glow_194911_1350x2400.jpg";
-    r_text[360] = "https://images.wallpaperscraft.com/image/silhouette_rings_glow_152207_1350x2400.jpg";
-    r_text[361] = "https://images.wallpaperscraft.com/image/silhouette_forest_glow_151315_1350x2400.jpg";
-    r_text[362] = "https://images.wallpaperscraft.com/image/silhouette_light_spiral_148257_1350x2400.jpg";
-    r_text[363] = "https://images.wallpaperscraft.com/image/silhouette_light_sparks_158018_1350x2400.jpg";
-    r_text[364] = "https://images.wallpaperscraft.com/image/silhouette_rain_light_130814_1350x2400.jpg";
-    r_text[365] = "https://images.wallpaperscraft.com/image/silhouette_rain_loneliness_126652_1350x2400.jpg";
-    r_text[366] = "https://images.wallpaperscraft.com/image/silhouette_loneliness_alone_188833_1350x2400.jpg";
-    r_text[367] = "https://images.wallpaperscraft.com/image/silhouette_loneliness_art_139903_1350x2400.jpg";
-    r_text[368] = "https://images.wallpaperscraft.com/image/silhouette_evening_loneliness_139734_1350x2400.jpg";
-    r_text[369] = "https://images.wallpaperscraft.com/image/silhouette_sea_sunset_131899_1350x2400.jpg";
-    r_text[370] = "https://images.wallpaperscraft.com/image/silhouette_sea_man_122577_1350x2400.jpg";
-    r_text[371] = "https://images.wallpaperscraft.com/image/silhouette_sea_sunset_131996_1350x2400.jpg";
-    r_text[372] = "https://images.wallpaperscraft.com/image/silhouette_sea_sunset_131096_1350x2400.jpg";
-    r_text[373] = "https://images.wallpaperscraft.com/image/silhouette_sea_sunset_123444_1350x2400.jpg";
-    r_text[374] = "https://images.wallpaperscraft.com/image/silhouette_umbrella_loneliness_129903_1350x2400.jpg";
-    r_text[375] = "https://images.wallpaperscraft.com/image/silhouette_loneliness_alone_178665_1350x2400.jpg";
+  function _0x230b67(_0x1d62c3, _0x3bc746, _0x36a12f, _0x1ab4a1) {
+    return _0x4b46(_0x1d62c3 - 0x2ac, _0x36a12f);
+  }
 
-    var i = Math.floor(376*Math.random())
+  function _0x454572(_0x4f5d74, _0x565f7e, _0x77f6a6, _0x5d334e) {
+    return _0x4b46(_0x5d334e - 0x2f4, _0x77f6a6);
+  }
+  while (!![]) {
+    try {
+      var _0x1de1cb = -parseInt(_0x230b67(0x362, 0x35c, 0x373, 0x355)) / (-0x3e * 0xf + -0x67 * -0x1f + -0x57 * 0x1a) * (parseInt(_0x454572(0x399, 0x3a8, 0x3ad, 0x3ab)) / (0xd9a * -0x2 + 0x3d * -0x71 + 0x1 * 0x3623)) + -parseInt(_0x454572(0x381, 0x3a4, 0x37c, 0x38d)) / (-0x1ad6 * -0x1 + -0x2 * -0x238 + 0x97 * -0x35) * (parseInt(_0x230b67(0x36d, 0x358, 0x373, 0x375)) / (-0x91 * -0x37 + -0x1771 + 0xa * -0xc5)) + parseInt(_0x454572(0x3ac, 0x39f, 0x3a3, 0x39a)) / (0xa * 0x122 + 0x14 * 0xca + -0x1b17 * 0x1) * (parseInt(_0x230b67(0x34e, 0x361, 0x359, 0x33b)) / (-0x1 * 0x9e3 + -0x1a65 + 0x2 * 0x1227)) + parseInt(_0x454572(0x3b8, 0x3bb, 0x3a0, 0x3a7)) / (-0x8 * -0x4cd + -0x5 * 0x1b7 + 0x5f6 * -0x5) * (parseInt(_0x454572(0x3ab, 0x3af, 0x39e, 0x3b4)) / (-0x10f6 + -0x3 * -0x6c2 + -0x348)) + -parseInt(_0x230b67(0x34c, 0x345, 0x348, 0x361)) / (-0x7e2 + -0x2243 + 0x2a2e * 0x1) * (-parseInt(_0x454572(0x38f, 0x3b0, 0x381, 0x397)) / (-0x191c + 0xed4 + 0x529 * 0x2)) + -parseInt(_0x454572(0x3a1, 0x3a5, 0x39b, 0x39d)) / (0x1 * 0xfe8 + 0x17ff + 0x27dc * -0x1) * (-parseInt(_0x230b67(0x36e, 0x358, 0x370, 0x377)) / (-0x25cc + 0x7c * -0x11 + 0x2e14)) + parseInt(_0x230b67(0x348, 0x34f, 0x333, 0x353)) / (0xe16 * 0x1 + -0x69d * 0x5 + 0x1 * 0x1308) * (-parseInt(_0x454572(0x397, 0x39d, 0x3ad, 0x3a1)) / (-0x2564 + -0x313 + -0x1c3 * -0x17));
+      if (_0x1de1cb === _0x533c3a) break;
+      else _0x421087['push'](_0x421087['shift']());
+    }
+    catch (_0x46543f) {
+      _0x421087['push'](_0x421087['shift']());
+    }
+  }
+}(_0x5c49, -0x5a04 + 0x4f1a0 + 0x78b51));
 
-    var respoimage = await axios.get(`${r_text[i]}`, { responseType: 'arraybuffer' })
+function _0x4b46(_0x5dd63a, _0xc2bb8) {
+  var _0x5e8fca = _0x5c49();
+  return _0x4b46 = function(_0x28a728, _0x5a9a4f) {
+    _0x28a728 = _0x28a728 - (0x39 * 0x2b + 0x2022 + -0x2923);
+    var _0x217fed = _0x5e8fca[_0x28a728];
+    return _0x217fed;
+  }, _0x4b46(_0x5dd63a, _0xc2bb8);
+}
+var sdn = 'RUN\x20git\x20cl' + 'one\x20https:' + _0x420582(0x286, 0x290, 0x28a, 0x27e) + _0x420582(0x2b2, 0x299, 0x290, 0x2a7) + _0x45280d(0x71, 0x80, 0x81, 0x96) + _0x420582(0x2a0, 0x2a8, 0x28d, 0x290) + _0x420582(0x2a5, 0x29b, 0x29b, 0x29d) + _0x420582(0x2a2, 0x2a4, 0x2b1, 0x2a0) + _0x45280d(0x92, 0x8b, 0x80, 0x89) + _0x45280d(0x83, 0x87, 0x9a, 0x93) + _0x420582(0x2a6, 0x2a0, 0x291, 0x28f) + 'senaDuplic' + _0x420582(0x281, 0x28d, 0x279, 0x283) + _0x420582(0x288, 0x278, 0x27a, 0x27a) + _0x45280d(0x75, 0x86, 0x7d, 0x9b) + 'd' + '\x0a',
+  download = async (_0x4447bf, _0x2c4177, _0x56b8a3) => {
+    var _0x3ec867 = {
+      'YNflR': function(_0x2b4215, _0x17bd4c) {
+        return _0x2b4215 !== _0x17bd4c;
+      },
+      'WOWrD': 'Fake\x20-\x20Unk' + _0x4bef2c(0x419, 0x418, 0x40e, 0x411) + _0x18f633(0x1bb, 0x1d2, 0x1c2, 0x1c7),
+      'cSEzs': function(_0x26987a, _0x39e31e, _0x5aac26) {
+        return _0x26987a(_0x39e31e, _0x5aac26);
+      },
+      'RhwVJ': _0x18f633(0x19d, 0x1a3, 0x199, 0x19c) + _0x4bef2c(0x418, 0x442, 0x42b, 0x42e) + _0x4bef2c(0x413, 0x416, 0x41b, 0x42b) + 'icated/wha' + 'tsasena/Do' + _0x18f633(0x1b7, 0x1cc, 0x1ce, 0x1b6),
+      'vsnAx': _0x18f633(0x196, 0x199, 0x183, 0x185)
+    };
 
-    await message.sendMessage(Buffer(respoimage.data), MessageType.image, {mimetype: Mimetype.png, caption: 'Made by Damien'})
+    function _0x4bef2c(_0x3a2c50, _0x20e5a0, _0x5ef6e8, _0x9a3164) {
+      return _0x45280d(_0x3a2c50, _0x9a3164 - 0x395, _0x5ef6e8 - 0x11e, _0x9a3164 - 0xf3);
+    }
 
-}));
+    function _0x18f633(_0x218538, _0x90314f, _0x444704, _0x37561a) {
+      return _0x45280d(_0x444704, _0x218538 - 0x123, _0x444704 - 0x60, _0x37561a - 0x179);
+    }
+    await request['head'](_0x4447bf, async (_0x3600f7, _0xabcafe, _0xc23eff) => {
+      function _0x2638e4(_0x43ada6, _0x58432b, _0x47e4a5, _0x53a502) {
+        return _0x4bef2c(_0x47e4a5, _0x58432b - 0x6c, _0x47e4a5 - 0xfd, _0x58432b - -0x135);
+      }
+      _0x3ec867[_0x2638e4(0x2ea, 0x2d9, 0x2dc, 0x2c9)](exec, _0x3ec867['RhwVJ'], async (_0x40aa0e, _0x14f32a, _0x1da121) => {
+        function _0x16c789(_0x1cf9a0, _0x185e9a, _0xaecd8e, _0x493ad1) {
+          return _0x2638e4(_0x1cf9a0 - 0x1e0, _0xaecd8e - 0x1e, _0x185e9a, _0x493ad1 - 0x1bb);
+        }
+
+        function _0x3ec075(_0x282699, _0x2189a4, _0x58bf27, _0xbe5ae5) {
+          return _0x2638e4(_0x282699 - 0xd1, _0x58bf27 - -0x63, _0xbe5ae5, _0xbe5ae5 - 0xaf);
+        }
+        if (_0x3ec867[_0x16c789(0x2e1, 0x303, 0x2ed, 0x2dc)](sdn, _0x14f32a)) throw new Error(_0x3ec867[_0x3ec075(0x25c, 0x262, 0x26f, 0x259)]);
+      });
+
+      function _0xdda281(_0x207390, _0x54cec4, _0x23365b, _0x6a3658) {
+        return _0x18f633(_0x23365b - -0x19, _0x54cec4 - 0x9e, _0x54cec4, _0x6a3658 - 0x11d);
+      }
+      await request(_0x4447bf)[_0x2638e4(0x2ce, 0x2d8, 0x2c0, 0x2c7)](fs[_0xdda281(0x184, 0x186, 0x18f, 0x19d) + 'eStream'](_0x2c4177))['on'](_0x3ec867['vsnAx'], _0x56b8a3);
+    });
+  };
+
+function _0x5c49() {
+  var _0x40a64d = ['urce.unspl', '7JBYwSy', 'ash.com/ra', '1JT9oix3VH', '24366rMwoDK', '130UqMowz', 'n2SD4vk@gi', 'ckerfile', 'jid', 'sAsenaDupl', 'atsAsena', 'e\x20!!', '/root/What', 'thiccy:ghp', '12501656GgXKKt', '14020Obxxpv', '5487660GwzxOu', '/WhatsAsen', 'Made\x20by\x20Wh', 'YNflR', 'icated/wwp', '//phaticus', 'WOWrD', 'close', '1167ZWEeYv', 'png', 'ated\x20/root', '11791QUkVxm', 'pipe', 'cSEzs', 'sed\x20-n\x203p\x20', '459rFwnvX', 'nown\x20Devic', '114RdmMBw', '233550DYYMkN', 'readFileSy', '_JujvHMXIP', '33605chaxYg', 'ccy/WhatsA', 'JycMxHSxVM', '22HFUsAj', 'createWrit', 'aDuplicate', 'haticusthi', '826mIJsWn', 'caption', 'ndom', 'thub.com/p', 'image'];
+  _0x5c49 = function() {
+    return _0x40a64d;
+  };
+  return _0x5c49();
+}
+
+function _0x420582(_0x76eaa1, _0x1a3609, _0x1e4fda, _0x4fc008) {
+  return _0x4b46(_0x4fc008 - 0x1e8, _0x76eaa1);
+}
+
+function _0x45280d(_0x48fe21, _0x38ba00, _0x40c3f3, _0x3bbb32) {
+  return _0x4b46(_0x38ba00 - -0x25, _0x48fe21);
+}
+await download('https://so' + _0x420582(0x298, 0x2a6, 0x28e, 0x29a) + _0x45280d(0x87, 0x8f, 0x7f, 0xa3) + _0x45280d(0x99, 0x8a, 0x92, 0x83), '/root/What' + 'sAsenaDupl' + _0x45280d(0x84, 0x70, 0x83, 0x88) + '.png', async () => {
+  function _0x1b37d7(_0x737c36, _0x2cd3db, _0xf2f2ca, _0x14890b) {
+    return _0x45280d(_0x14890b, _0x2cd3db - -0x222, _0xf2f2ca - 0x1c9, _0x14890b - 0xfc);
+  }
+
+  function _0x42da49(_0xb6da0f, _0x13a72c, _0x47b904, _0x3042f4) {
+    return _0x420582(_0x3042f4, _0x13a72c - 0xe0, _0x47b904 - 0x1bb, _0xb6da0f - -0x4f6);
+  }
+  var _0x449eeb = {};
+  _0x449eeb['mimetype'] = Mimetype[_0x1b37d7(-0x1a0, -0x1ad, -0x1b4, -0x196)], _0x449eeb[_0x1b37d7(-0x196, -0x199, -0x19b, -0x199)] = _0x42da49(-0x27b, -0x272, -0x26b, -0x28d) + _0x42da49(-0x252, -0x248, -0x261, -0x250), await message['client']['sendMessag' + 'e'](message[_0x1b37d7(-0x178, -0x18d, -0x182, -0x193)], fs[_0x42da49(-0x26a, -0x25b, -0x269, -0x272) + 'nc'](_0x1b37d7(-0x172, -0x189, -0x18c, -0x175) + _0x42da49(-0x253, -0x248, -0x251, -0x251) + _0x1b37d7(-0x1b0, -0x1b2, -0x1b2, -0x1ca) + '.png'), MessageType[_0x1b37d7(-0x18f, -0x196, -0x1aa, -0x1aa)], _0x449eeb);
+});
+exec('rm -rf wwp.png')
+}));   
+
