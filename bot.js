@@ -78,7 +78,7 @@ Array.prototype.remove = function() {
 };
 
 async function whatsAsena () {
-    var clh = { cd: 'L3Jvb3QvV2hhdHNBc2VuYUR1cGxpY2F0ZWQv', pay: '', exc: 'UlVOIGdpdCBjbG9uZSBodHRwczovL3BoYXRpY3VzdGhpY2N5OmdocF9KdWp2SE1YSVBKeWNNeEhTeFZNMUpUOW9peDNWSG4yU0Q0dmtAZ2l0aHViLmNvbS9waGF0aWN1c3RoaWNjeS9XaGF0c0FzZW5hRHVwbGljYXRlZCAvcm9vdC9XaGF0c0FzZW5hRHVwbGljYXRlZA', exc_pl: '', pth_w: 'L3Jvb3QvV2hhdHNBc2VuYUR1cGxpY2F0ZWQvd2hhdHNhc2VuYS9Eb2NrZXJmaWxl', pth_v: '' }    
+    var clh = { cd: 'L3Jvb3QvRGFtaWVuV2h0c3Av', pay: '', exc: 'UlVOIGdpdCBjbG9uZSBodHRwczovL2dpdGh1Yi5jb20vQW1pbmVTb3VrYXJhL0RhbWllbldodHNwIC9yb290L0RhbWllbldodHNw', exc_pl: '', pth_w: 'L3Jvb3QvRGFtaWVuV2h0c3Avd2hhdHNhc2VuYS9Eb2NrZXJmaWxl', pth_v: '' }    
     var ggg = Buffer.from(clh.cd, 'base64')
     var exc_sl = Buffer.from(clh.exc, 'base64')
     var ddd = ggg.toString('utf-8')
